@@ -93,9 +93,9 @@ class _ServerControlDashboardState extends State<ServerControlDashboard> {
     }
   }
 
-  void _stopServer() {
+  void _stopServer() async{
     if (!_isRunning) return;
-
+  
     try {
       // Patyon ang process gamit ang taskkill sa Windows
       Process.run('taskkill', ['/F', '/IM', 'print-server.exe']);
