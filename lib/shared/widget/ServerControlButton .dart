@@ -4,12 +4,16 @@ class ServerControlButton extends StatelessWidget {
   final bool isRunning;
   final bool isStartButton;
   final VoidCallback? onPressed;
+  final String text;
+  final IconData icon;
 
   const ServerControlButton({
     super.key,
     required this.isRunning,
     required this.isStartButton,
     required this.onPressed,
+    required this.text,
+    required this.icon
   });
 
   @override
@@ -25,8 +29,9 @@ class ServerControlButton extends StatelessWidget {
                                 ? const Color(0xFF33363F)
                                     : const Color(0xFF39E55A))
                                       : (isRunning
-                                            ? const Color(0xFF2D2F36)
+                                            ?  const Color.fromARGB(255, 182, 1, 1) 
                                           : const Color(0xFF1E2025)),
+                                          
                                         foregroundColor: isStart ? Colors.black : Colors.white,
                                     shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10),
@@ -36,17 +41,10 @@ class ServerControlButton extends StatelessWidget {
                     onPressed: onPressed,
                 child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-        children: const [
-            Icon(Icons.play_arrow, size: 28),
+        children: [
+            Icon(icon, size: 28),
                 SizedBox(height: 4),
-                    Text(
-                        'START SERVER',
-                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
-                        ),
-                    Text(
-                'STOP SERVER',
-              style: TextStyle(fontSize: 10, color: Colors.black54),
-            ),
+                 Text(text,style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
         ],
     ),
       ),
