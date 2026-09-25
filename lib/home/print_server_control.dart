@@ -1,11 +1,7 @@
-import 'dart:async';
-import 'dart:convert';
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../shared/widget/ServerControlButton .dart';
 import '../provider/ServerControlProvider.dart';
-
 
 class ServerControlDashboard extends StatefulWidget {
   const ServerControlDashboard({super.key});
@@ -15,88 +11,8 @@ class ServerControlDashboard extends StatefulWidget {
 }
 
 class _ServerControlDashboardState extends State<ServerControlDashboard> {
-  Process? _process;
-  bool _isRunning = false;
-  final List<String> _logs = [];
+  // final List<String> context.of<Servercontrolprovider>().logs = [];
   final ScrollController _scrollController = ScrollController();
-  int _clientsConnected = 0;
-
-
-  void _addLog(String message) {
-    final timestamp = DateTime.now().toString().split(' ')[1].substring(0, 8);
-    setState(() {
-      _logs.add('[$timestamp] $message');
-    });
-
-    // Auto scroll down sa terminal log window
-    Future.delayed(const Duration(milliseconds: 100), () {
-      if (_scrollController.hasClients) {
-        _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
-      }
-    });
-  }
-
-  // void _startServer() async {
-  //   if (_isRunning) return;
-
-  //   try {
-  //     _addLog('Attempting to start PrintQueue Server...');
-      
-  //     // I-execute ang standalone executable
-  //     _process = await Process.start('print-server.exe', [], runInShell: true);
-
-  //     setState(() {
-  //       _isRunning = true;
-  //       _clientsConnected = 1; // Sample initial connection
-  //     });
-
-  //     _addLog('System started (Node.js/PKG).');
-  //     _addLog('PrintQueue server active on port 3000.');
-
-  //     // Capture stdout (normal logs)
-  //     _process?.stdout.transform(utf8.decoder).listen((data) {
-  //       final lines = data.trim().split('\n');
-  //       for (var line in lines) {
-  //         if (line.isNotEmpty) _addLog(line);
-  //       }
-  //     });
-
-  //     // Capture stderr (errors)
-  //     _process?.stderr.transform(utf8.decoder).listen((data) {
-  //       final lines = data.trim().split('\n');
-  //       for (var line in lines) {
-  //         if (line.isNotEmpty) _addLog('ERROR: $line');
-  //       }
-  //     });
-
-  //   } catch (e) {
-  //     _addLog('Failed to start server process: $e');
-  //     setState(() {
-  //       _isRunning = false;
-  //     });
-  //   }
-  // }
-
-  void _stopServer() async{
-    if (!_isRunning) return;
-  
-    try {
-      // Patyon ang process gamit ang taskkill sa Windows
-      Process.run('taskkill', ['/F', '/IM', 'print-server.exe']);
-
-      _process?.kill();
-      _process = null;
-
-      setState(() {
-        _isRunning = false;
-        _clientsConnected = 0;
-      });
-
-      _addLog('Server process stopped by user.');
-    } catch (e) {
-      _addLog('Error stopping process: $e');
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -109,7 +25,11 @@ class _ServerControlDashboardState extends State<ServerControlDashboard> {
             color: const Color(0xFF111215),
             child: Row(
               children: [
-                const Icon(Icons.print_outlined, color: Colors.white70, size: 20),
+                const Icon(
+                  Icons.print_outlined,
+                  color: Colors.white70,
+                  size: 20,
+                ),
                 const SizedBox(width: 8),
                 const Text(
                   'PRINTSERVER CONTROL CENTER',
@@ -121,11 +41,6 @@ class _ServerControlDashboardState extends State<ServerControlDashboard> {
                   ),
                 ),
                 const Spacer(),
-                // const Icon(Icons.remove, size: 16, color: Colors.white54),
-                // const SizedBox(width: 16),
-                // const Icon(Icons.crop_square, size: 14, color: Colors.white54),
-                // const SizedBox(width: 16),
-                // const Icon(Icons.close, size: 16, color: Colors.white54),
               ],
             ),
           ),
@@ -144,19 +59,27 @@ class _ServerControlDashboardState extends State<ServerControlDashboard> {
                         height: 16,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: _isRunning ? const Color(0xFF39E55A) : const Color(0xFFFF4D4D),
+                          color: context.read<Servercontrolprovider>().isRunning
+                              ? const Color(0xFF39E55A)
+                              : const Color(0xFFFF4D4D),
                           boxShadow: [
                             BoxShadow(
-                              color: (_isRunning ? const Color(0xFF39E55A) : const Color(0xFFFF4D4D)).withOpacity(0.5),
+                              color:
+                                  (context
+                                              .read<Servercontrolprovider>()
+                                              .isRunning
+                                          ? const Color(0xFF39E55A)
+                                          : const Color(0xFFFF4D4D))
+                                      .withOpacity(0.5),
                               blurRadius: 10,
                               spreadRadius: 2,
-                            )
+                            ),
                           ],
                         ),
                       ),
                       const SizedBox(width: 12),
                       Text(
-                        'System Status: ${_isRunning ? "ONLINE" : "OFFLINE"}',
+                        'System Status: ${context.read<Servercontrolprovider>().isRunning ? "ONLINE" : "OFFLINE"}',
                         style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
@@ -165,9 +88,7 @@ class _ServerControlDashboardState extends State<ServerControlDashboard> {
                       ),
                     ],
                   ),
-
                   const SizedBox(height: 24),
-
                   // MAIN CONTROLS & LOGS SECTION
                   Expanded(
                     child: Row(
@@ -194,28 +115,59 @@ class _ServerControlDashboardState extends State<ServerControlDashboard> {
                                   ),
                                 ),
                                 const SizedBox(height: 16),
-                               Row(
+                                Row(
                                   children: [
                                     ServerControlButton(
-                                      isRunning: _isRunning,
+                                      isRunning: context
+                                          .read<Servercontrolprovider>()
+                                          .isRunning,
                                       isStartButton: true,
-                                      onPressed: _isRunning ? null : context.read<Servercontrolprovider>().startServer,
+                                      onPressed:
+                                          context
+                                              .read<Servercontrolprovider>()
+                                              .isRunning
+                                          ? null
+                                          : context
+                                                .read<Servercontrolprovider>()
+                                                .startServer,
                                     ),
 
                                     const SizedBox(width: 12),
 
                                     ServerControlButton(
-                                      isRunning: _isRunning,
+                                      isRunning: context
+                                          .read<Servercontrolprovider>()
+                                          .isRunning,
                                       isStartButton: false,
-                                      onPressed: _isRunning ? _stopServer : null,
+                                      onPressed:
+                                          context
+                                              .read<Servercontrolprovider>()
+                                              .isRunning
+                                          ? context
+                                                .read<Servercontrolprovider>()
+                                                .stopServer
+                                          : null,
                                     ),
                                   ],
                                 ),
                                 const SizedBox(height: 24),
-                                _buildDetailItem('Server Type:', 'Standalone .EXE'),
-                                _buildDetailItem('Status:', _isRunning ? 'Running' : 'Stopped'),
+                                _buildDetailItem(
+                                  'Server Type:',
+                                  'Standalone .EXE',
+                                ),
+                                _buildDetailItem(
+                                  'Status:',
+                                  context
+                                          .read<Servercontrolprovider>()
+                                          .isRunning
+                                      ? 'Running'
+                                      : 'Stopped',
+                                ),
                                 _buildDetailItem('Port:', '3000'),
-                                _buildDetailItem('Clients Connected:', '$_clientsConnected'),
+                                _buildDetailItem(
+                                  'Clients Connected:',
+                                  '${context.read<Servercontrolprovider>().clientsConnected}',
+                                ),
                               ],
                             ),
                           ),
@@ -236,18 +188,27 @@ class _ServerControlDashboardState extends State<ServerControlDashboard> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: const [
                                         Text(
                                           'REAL-TIME LOGS',
-                                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: Colors.white70),
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 14,
+                                            color: Colors.white70,
+                                          ),
                                         ),
                                         Text(
                                           'MGA LOGS SA PANAHON',
-                                          style: TextStyle(fontSize: 10, color: Colors.white38),
+                                          style: TextStyle(
+                                            fontSize: 10,
+                                            color: Colors.white38,
+                                          ),
                                         ),
                                       ],
                                     ),
@@ -257,8 +218,12 @@ class _ServerControlDashboardState extends State<ServerControlDashboard> {
                                         color: Colors.white10,
                                         borderRadius: BorderRadius.circular(4),
                                       ),
-                                      child: const Icon(Icons.terminal, size: 16, color: Colors.white54),
-                                    )
+                                      child: const Icon(
+                                        Icons.terminal,
+                                        size: 16,
+                                        color: Colors.white54,
+                                      ),
+                                    ),
                                   ],
                                 ),
                                 const SizedBox(height: 16),
@@ -273,18 +238,25 @@ class _ServerControlDashboardState extends State<ServerControlDashboard> {
                                     ),
                                     child: ListView.builder(
                                       controller: _scrollController,
-                                      itemCount: _logs.length,
+                                      itemCount: context
+                                          .read<Servercontrolprovider>()
+                                          .logs
+                                          .length,
                                       itemBuilder: (context, index) {
-                                        final log = _logs[index];
+                                        final log = context
+                                            .read<Servercontrolprovider>()
+                                            .logs[index];
                                         return Padding(
-                                          padding: const EdgeInsets.symmetric(vertical: 2.0),
+                                          padding: const EdgeInsets.symmetric(
+                                            vertical: 2.0,
+                                          ),
                                           child: Text(
                                             log,
                                             style: TextStyle(
                                               fontFamily: 'monospace',
                                               fontSize: 12,
-                                              color: log.contains('ERROR') 
-                                                  ? Colors.redAccent 
+                                              color: log.contains('ERROR')
+                                                  ? Colors.redAccent
                                                   : const Color(0xFF39E55A),
                                             ),
                                           ),
@@ -324,9 +296,19 @@ class _ServerControlDashboardState extends State<ServerControlDashboard> {
       padding: const EdgeInsets.symmetric(vertical: 6.0),
       child: Row(
         children: [
-          Text(label, style: const TextStyle(color: Colors.white70, fontSize: 13)),
+          Text(
+            label,
+            style: const TextStyle(color: Colors.white70, fontSize: 13),
+          ),
           const SizedBox(width: 8),
-          Text(value, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 13)),
+          Text(
+            value,
+            style: const TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+              fontSize: 13,
+            ),
+          ),
         ],
       ),
     );
