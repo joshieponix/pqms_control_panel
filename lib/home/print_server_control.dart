@@ -18,7 +18,7 @@ class _ServerControlDashboardState extends State<ServerControlDashboard> {
   final List<String> _logs = [];
   final ScrollController _scrollController = ScrollController();
   int _clientsConnected = 0;
-
+  
 
   void _addLog(String message) {
     final timestamp = DateTime.now().toString().split(' ')[1].substring(0, 8);

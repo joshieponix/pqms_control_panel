@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:print_queue_control/provider/ServerControlProvider.dart';
 import './home/print_server_control.dart';
-
+import 'package:provider/provider.dart';
 void main() {
-  runApp(const PrintServerControlApp());
+  runApp(
+      ChangeNotifierProvider(
+        create: (context) => Servercontrolprovider(),
+          child:PrintServerControlApp()
+      )
+  );
 }
 
 class PrintServerControlApp extends StatelessWidget {
