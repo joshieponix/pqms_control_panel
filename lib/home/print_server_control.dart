@@ -2,7 +2,9 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../shared/widget/ServerControlButton .dart';
+import '../provider/ServerControlProvider.dart';
 
 
 class ServerControlDashboard extends StatefulWidget {
@@ -18,7 +20,7 @@ class _ServerControlDashboardState extends State<ServerControlDashboard> {
   final List<String> _logs = [];
   final ScrollController _scrollController = ScrollController();
   int _clientsConnected = 0;
-  
+
 
   void _addLog(String message) {
     final timestamp = DateTime.now().toString().split(' ')[1].substring(0, 8);
@@ -34,46 +36,46 @@ class _ServerControlDashboardState extends State<ServerControlDashboard> {
     });
   }
 
-  void _startServer() async {
-    if (_isRunning) return;
+  // void _startServer() async {
+  //   if (_isRunning) return;
 
-    try {
-      _addLog('Attempting to start PrintQueue Server...');
+  //   try {
+  //     _addLog('Attempting to start PrintQueue Server...');
       
-      // I-execute ang standalone executable
-      _process = await Process.start('print-server.exe', [], runInShell: true);
+  //     // I-execute ang standalone executable
+  //     _process = await Process.start('print-server.exe', [], runInShell: true);
 
-      setState(() {
-        _isRunning = true;
-        _clientsConnected = 1; // Sample initial connection
-      });
+  //     setState(() {
+  //       _isRunning = true;
+  //       _clientsConnected = 1; // Sample initial connection
+  //     });
 
-      _addLog('System started (Node.js/PKG).');
-      _addLog('PrintQueue server active on port 3000.');
+  //     _addLog('System started (Node.js/PKG).');
+  //     _addLog('PrintQueue server active on port 3000.');
 
-      // Capture stdout (normal logs)
-      _process?.stdout.transform(utf8.decoder).listen((data) {
-        final lines = data.trim().split('\n');
-        for (var line in lines) {
-          if (line.isNotEmpty) _addLog(line);
-        }
-      });
+  //     // Capture stdout (normal logs)
+  //     _process?.stdout.transform(utf8.decoder).listen((data) {
+  //       final lines = data.trim().split('\n');
+  //       for (var line in lines) {
+  //         if (line.isNotEmpty) _addLog(line);
+  //       }
+  //     });
 
-      // Capture stderr (errors)
-      _process?.stderr.transform(utf8.decoder).listen((data) {
-        final lines = data.trim().split('\n');
-        for (var line in lines) {
-          if (line.isNotEmpty) _addLog('ERROR: $line');
-        }
-      });
+  //     // Capture stderr (errors)
+  //     _process?.stderr.transform(utf8.decoder).listen((data) {
+  //       final lines = data.trim().split('\n');
+  //       for (var line in lines) {
+  //         if (line.isNotEmpty) _addLog('ERROR: $line');
+  //       }
+  //     });
 
-    } catch (e) {
-      _addLog('Failed to start server process: $e');
-      setState(() {
-        _isRunning = false;
-      });
-    }
-  }
+  //   } catch (e) {
+  //     _addLog('Failed to start server process: $e');
+  //     setState(() {
+  //       _isRunning = false;
+  //     });
+  //   }
+  // }
 
   void _stopServer() async{
     if (!_isRunning) return;
@@ -197,7 +199,7 @@ class _ServerControlDashboardState extends State<ServerControlDashboard> {
                                     ServerControlButton(
                                       isRunning: _isRunning,
                                       isStartButton: true,
-                                      onPressed: _isRunning ? null : _startServer,
+                                      onPressed: _isRunning ? null : context.read<Servercontrolprovider>().startServer,
                                     ),
 
                                     const SizedBox(width: 12),

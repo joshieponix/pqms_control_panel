@@ -26,7 +26,7 @@ class Servercontrolprovider  extends ChangeNotifier{
           });
   }
 
- Future<void> _startServer() async {
+ Future<void> startServer() async {
     if (_isRunning) return;
 
     try {
