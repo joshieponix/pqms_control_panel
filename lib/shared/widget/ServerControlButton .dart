@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class ServerControlButton extends StatelessWidget {
   final bool isRunning;
   final bool isStartButton;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
 
   const ServerControlButton({
     super.key,

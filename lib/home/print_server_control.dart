@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
+import '../shared/widget/ServerControlButton .dart';
 
 
 class ServerControlDashboard extends StatefulWidget {
@@ -17,6 +18,7 @@ class _ServerControlDashboardState extends State<ServerControlDashboard> {
   final List<String> _logs = [];
   final ScrollController _scrollController = ScrollController();
   int _clientsConnected = 0;
+
 
   void _addLog(String message) {
     final timestamp = DateTime.now().toString().split(' ')[1].substring(0, 8);
@@ -190,56 +192,20 @@ class _ServerControlDashboardState extends State<ServerControlDashboard> {
                                   ),
                                 ),
                                 const SizedBox(height: 16),
-                                Row(
+                               Row(
                                   children: [
-                                    // START BUTTON
-                                    Expanded(
-                                      child: SizedBox(
-                                        height: 90,
-                                        child: ElevatedButton(
-                                          style: ElevatedButton.styleFrom(
-                                            backgroundColor: _isRunning ? const Color(0xFF33363F) : const Color(0xFF39E55A),
-                                            foregroundColor: Colors.black,
-                                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                                            elevation: _isRunning ? 0 : 4,
-                                          ),
-                                          onPressed: _isRunning ? null : _startServer,
-                                          child: Column(
-                                            mainAxisAlignment: MainAxisAlignment.center,
-                                            children: const [
-                                              Icon(Icons.play_arrow, size: 28),
-                                              SizedBox(height: 4),
-                                              Text('START SERVER', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
-                                              Text('SUGDAN ANG SERVER', style: TextStyle(fontSize: 10, color: Colors.black54)),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
+                                    ServerControlButton(
+                                      isRunning: _isRunning,
+                                      isStartButton: true,
+                                      onPressed: _isRunning ? null : _startServer,
                                     ),
+
                                     const SizedBox(width: 12),
-                                    // STOP BUTTON
-                                    Expanded(
-                                      child: SizedBox(
-                                        height: 90,
-                                        child: ElevatedButton(
-                                          style: ElevatedButton.styleFrom(
-                                            backgroundColor: _isRunning ? const Color(0xFF2D2F36) : const Color(0xFF1E2025),
-                                            foregroundColor: Colors.white,
-                                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                                            elevation: 0,
-                                          ),
-                                          onPressed: _isRunning ? _stopServer : null,
-                                          child: Column(
-                                            mainAxisAlignment: MainAxisAlignment.center,
-                                            children: const [
-                                              Icon(Icons.stop, size: 24, color: Colors.white70),
-                                              SizedBox(height: 4),
-                                              Text('STOP SERVER', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13, color: Colors.white70)),
-                                              Text('PUDNGAN ANG SERVER', style: TextStyle(fontSize: 10, color: Colors.white38)),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
+
+                                    ServerControlButton(
+                                      isRunning: _isRunning,
+                                      isStartButton: false,
+                                      onPressed: _isRunning ? _stopServer : null,
                                     ),
                                   ],
                                 ),
