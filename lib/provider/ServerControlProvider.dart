@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:print_queue_control/core/services/computer_info_services.dart';
 import 'package:print_queue_control/core/services/url_launcher_services.dart';
+import 'package:http/http.dart' as http;
 
 
 class ServerControlProvider extends ChangeNotifier {
@@ -21,6 +22,24 @@ class ServerControlProvider extends ChangeNotifier {
     final timestamp = DateTime.now().toString().split(' ')[1].substring(0, 8);
     _logs.add('[$timestamp] $message');
     notifyListeners();
+  }
+
+  Future<void> checkServerStatus() async{
+    try {
+      final ipaddress = await ComputerInfoServices.getLocalIp();
+      final serverUrl = 'http://$ipaddress:3000/';
+      final response = await http.get(Uri.parse(serverUrl))
+      .timeout(const Duration(seconds: 2));
+
+      if (response.statusCode == 200){
+        _isRunning = true;
+        _addLog('DETECTED EXISTING PRINT SERVER RUNNING ON PORT 3000.');
+        notifyListeners();
+      }
+    } catch (e) {
+      _isRunning = false;
+      notifyListeners();
+    }
   }
 
   Future<void> startServer() async {
