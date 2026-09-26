@@ -7,10 +7,13 @@ class ServerControlProvider extends ChangeNotifier {
   bool _isRunning = false;
   int _clientsConnected = 0;
   final List<String> _logs = [];
+  final String _username = Platform.environment['USERNAME'] ?? 'UNKNOWN';
+  
 
   bool get isRunning => _isRunning;
   int get clientsConnected => _clientsConnected;
   List<String> get logs => List.unmodifiable(_logs);
+  String get username => _username;
 
   void _addLog(String message) {
     final timestamp = DateTime.now().toString().split(' ')[1].substring(0, 8);
@@ -20,6 +23,8 @@ class ServerControlProvider extends ChangeNotifier {
 
   Future<void> startServer() async {
     if (_isRunning) return;
+
+   
 
     try {
       _addLog('Attempting to start PrintQueue Server...'.toUpperCase());
@@ -62,7 +67,7 @@ class ServerControlProvider extends ChangeNotifier {
 
       _isRunning = false;
       _clientsConnected = 0;
-      _addLog('Server process stopped by user.'.toUpperCase());
+      _addLog('Server process stopped by ${_username.toString()}.'.toUpperCase());
       notifyListeners();
     } catch (e) {
       _addLog('Error stopping process: $e'.toUpperCase());

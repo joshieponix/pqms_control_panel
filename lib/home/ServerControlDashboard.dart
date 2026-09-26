@@ -160,9 +160,10 @@ class _ServerControlDashboardState extends State<ServerControlDashboard> {
                                   ],
                                 ),
                                 const SizedBox(height: 24),
+                                Serverdetailitem(label: 'USERNAME', value: context.watch<ServerControlProvider>().username),
                                 Serverdetailitem(label: 'SERVER TYPE', value: 'STANDALONE .EXE'),
-                                Serverdetailitem(label: 'STATUS', value: provider.isRunning ? 'Running' : 'Stopped'),
-                                Serverdetailitem(label: 'CLIENTS CONNECTED', value: '${provider.clientsConnected}')
+                                Serverdetailitem(label: 'STATUS', value: provider.isRunning ? 'RUNNING' : 'STOPPED'),
+                                Serverdetailitem(label: 'CLIENTS CONNECTED', value: '${provider.clientsConnected}'),
                               ],
                             ),
                           ),
@@ -182,7 +183,7 @@ class _ServerControlDashboardState extends State<ServerControlDashboard> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Row(
+                                 Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
@@ -192,18 +193,11 @@ class _ServerControlDashboardState extends State<ServerControlDashboard> {
                                       children: [
                                         Text(
                                           'REAL-TIME LOGS',
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 14,
-                                            color: Colors.white70,
-                                          ),
-                                        ),
-                                        Text(
-                                          'MGA LOGS SA PANAHON',
-                                          style: TextStyle(
-                                            fontSize: 10,
-                                            color: Colors.white38,
-                                          ),
+                                          style:  GoogleFontServices.Poppins(
+                                            PoppinsColor: Colors.white70,
+                                            PoppinsfontWeight: FontWeight.bold,
+                                            Poppinsfontsize: 14
+                                          )
                                         ),
                                       ],
                                     ),
