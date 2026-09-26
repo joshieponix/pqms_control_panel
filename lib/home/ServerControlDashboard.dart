@@ -61,12 +61,6 @@ class _ServerControlDashboardState extends State<ServerControlDashboard> {
                     Poppinsfontsize: 14,
                     PoppinsSpacing: 1.1
                   )
-                  // TextStyle(
-                  //   fontWeight: FontWeight.bold,
-                  //   letterSpacing: 1.1,
-                  //   fontSize: 14,
-                  //   color: Colors.white,
-                  // ),
                 ),
                 Spacer(),
               ],
@@ -104,12 +98,17 @@ class _ServerControlDashboardState extends State<ServerControlDashboard> {
                       ),
                       const SizedBox(width: 12),
                       Text(
-                        'System Status: ${provider.isRunning ? "ONLINE" : "OFFLINE"}',
-                        style: const TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
+                        'SYSTEM STATUS: ${provider.isRunning ? "ONLINE" : "OFFLINE"}',
+                        style: GoogleFontServices.Poppins(
+                          PoppinsColor: Colors.white,
+                          PoppinsfontWeight: FontWeight.bold,
+                          Poppinsfontsize: 20
+                        )
+                        // const TextStyle(
+                        //   fontSize: 20,
+                        //   fontWeight: FontWeight.bold,
+                        //   color: Colors.white,
+                        // ),
                       ),
                     ],
                   ),
@@ -284,7 +283,6 @@ class _ServerControlDashboardState extends State<ServerControlDashboard> {
                         Poppinsfontsize: 14,
                         PoppinsfontWeight: FontWeight.bold,
                       ),
-                      // TextStyle(color: Colors.white38, fontSize: 11),
                     ),
                   ),
                 ],
