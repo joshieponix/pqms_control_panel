@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:print_queue_control/core/services/google_font_service.dart';
 import 'package:provider/provider.dart';
 import '../provider/ServerControlProvider.dart';
 import '../shared/widget/ServerControlButton .dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ServerControlDashboard extends StatefulWidget {
   const ServerControlDashboard({super.key});
@@ -267,10 +269,15 @@ class _ServerControlDashboardState extends State<ServerControlDashboard> {
                   const SizedBox(height: 16),
 
                   // FOOTER
-                  const Center(
+                  Center(
                     child: Text(
-                      'App Version: v1.0.3 | © 2026 Print Solutions Cebu',
-                      style: TextStyle(color: Colors.white38, fontSize: 11),
+                      'PQMS CONTROL PANEL Version: v1.0.0 | © 2026 Print Queue Managment System',
+                      style: GoogleFontServices.Poppins(
+                        PoppinsColor: Colors.white38,
+                        Poppinsfontsize: 14,
+                        PoppinsfontWeight: FontWeight.bold,
+                      ),
+                      // TextStyle(color: Colors.white38, fontSize: 11),
                     ),
                   ),
                 ],

@@ -3,6 +3,7 @@ import 'package:window_manager/window_manager.dart';
 
 
 
+
 class WindowService {
 
  static void _widgetFlutterBinding(){
@@ -19,7 +20,7 @@ class WindowService {
     String title = 'PRINTSERVER CONTROL CENTER',
     bool resizable = false,
   }) async {
-    
+
     _widgetFlutterBinding();
     _ensureInitializedWindow();
 
