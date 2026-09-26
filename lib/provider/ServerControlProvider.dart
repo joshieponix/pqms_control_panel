@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:print_queue_control/core/services/computer_info_services.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ServerControlProvider extends ChangeNotifier {
   Process? _process;
@@ -30,11 +31,20 @@ class ServerControlProvider extends ChangeNotifier {
       _isRunning = true;
       _clientsConnected = 1;
       final ipaddress = await ComputerInfoServices.getLocalIp();
+      final serverUrl = 'http://$ipaddress:3000/';
       notifyListeners();
 
       _addLog('System started...'.toUpperCase());
-      _addLog('Server is running on: http://${ipaddress}:3000/');
+      _addLog('Server is running on: ${serverUrl}');
       _addLog('pqms control panel server active on port 3000.'.toUpperCase());
+
+      final Uri url = Uri.parse(serverUrl);
+      if (await canLaunchUrl(url)) {
+        await launchUrl(
+          url,
+          mode: LaunchMode.externalApplication
+        );
+      }
 
       _process?.stdout.transform(utf8.decoder).listen((data) {
         final lines = data.trim().split('\n');
