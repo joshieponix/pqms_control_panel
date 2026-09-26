@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:print_queue_control/core/services/computer_info_services.dart';
 import 'package:print_queue_control/core/services/google_font_service.dart';
 import 'package:print_queue_control/shared/widget/ServerDetailItem.dart';
 import 'package:provider/provider.dart';

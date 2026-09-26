@@ -2,7 +2,8 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:print_queue_control/core/services/computer_info_services.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:print_queue_control/core/services/url_launcher_services.dart';
+
 
 class ServerControlProvider extends ChangeNotifier {
   Process? _process;
@@ -38,13 +39,7 @@ class ServerControlProvider extends ChangeNotifier {
       _addLog('Server is running on: ${serverUrl}');
       _addLog('pqms control panel server active on port 3000.'.toUpperCase());
 
-      final Uri url = Uri.parse(serverUrl);
-      if (await canLaunchUrl(url)) {
-        await launchUrl(
-          url,
-          mode: LaunchMode.externalApplication
-        );
-      }
+      UrlLauncherServices.urlLauncher(serverUrl);
 
       _process?.stdout.transform(utf8.decoder).listen((data) {
         final lines = data.trim().split('\n');
