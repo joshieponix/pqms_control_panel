@@ -24,7 +24,6 @@ class ServerControlProvider extends ChangeNotifier {
   Future<void> startServer() async {
     if (_isRunning) return;
      
-
     try {
       _addLog('Attempting to start PrintQueue Server...'.toUpperCase());
       _process = await Process.start('print-server.exe', [], runInShell: true);
