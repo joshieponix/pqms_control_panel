@@ -1,10 +1,41 @@
 import 'package:flutter/material.dart';
 import 'package:window_manager/window_manager.dart';
 
+class WindowsEvent{
+
+  
+  @override
+  void onWindowClose(BuildContext context) async {
+    bool isPreventClose = await windowManager.isPreventClose();
+    bool mounted = true;
+    if (isPreventClose && mounted) {
+      showDialog(
+        context: context,
+        builder: (_) => AlertDialog(
+          title: const Text('Confirm Exit'),
+          content: const Text('Are you sure you want to exit the PrintServer?'),
+          actions: [
+            TextButton(
+              child: const Text('Cancel'),
+              onPressed: () => Navigator.of(context).pop(),
+            ),
+            TextButton(
+              child: const Text('Exit'),
+              onPressed: () async {
+                Navigator.of(context).pop();
+                // Destroy the window completely
+                await windowManager.destroy();
+              },
+            ),
+          ],
+        ),
+      );
+    }
+  }
+}
 
 
-
-class WindowService {
+class WindowService extends WindowsEvent{
 
  static void _widgetFlutterBinding(){
      WidgetsFlutterBinding.ensureInitialized();
@@ -52,3 +83,5 @@ class WindowService {
 
 
 }
+
+
