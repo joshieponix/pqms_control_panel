@@ -26,7 +26,7 @@ class ServerControlProvider extends ChangeNotifier {
      
     try {
       _addLog('Attempting to start PrintQueue Server...'.toUpperCase());
-      _process = await Process.start('print-server.exe', [], runInShell: true);
+      _process = await Process.start('${Directory.current.path}\\print-server.exe', [], runInShell: true);
       _isRunning = true;
       _clientsConnected = 1;
       final ipaddress = await ComputerInfoServices.getLocalIp();
