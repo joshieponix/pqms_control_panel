@@ -52,7 +52,7 @@ class _ServerControlDashboardState extends State<ServerControlDashboard> {
             color: const Color(0xFF111215),
             child: Row(
               children: [
-                Icon(Icons.print_outlined, color: Colors.white70, size: 20),
+                Icon(Icons.admin_panel_settings, color: Colors.white70, size: 20),
                 SizedBox(width: 8),
                 Text(
                   'PQMS CONTROL PANEL',
