@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:print_queue_control/core/services/computer_info_services.dart';
 import 'package:print_queue_control/core/services/google_font_service.dart';
 import 'package:print_queue_control/shared/widget/ServerDetailItem.dart';
 import 'package:provider/provider.dart';
@@ -27,6 +28,13 @@ class _ServerControlDashboardState extends State<ServerControlDashboard> {
     });
   }
 
+
+@override
+void initState() {
+  super.initState();
+  context.read<ServerControlProvider>().loadComputerIpAddress();
+}
+
   @override
   void dispose() {
     _scrollController.dispose();
@@ -39,7 +47,7 @@ class _ServerControlDashboardState extends State<ServerControlDashboard> {
   Widget build(BuildContext context) {
     // context.watch ensures the widget rebuilds when state changes
     final provider = context.watch<ServerControlProvider>();
-
+   
     // Scroll down automatically whenever logs update
     _scrollToBottom();
 
@@ -160,10 +168,12 @@ class _ServerControlDashboardState extends State<ServerControlDashboard> {
                                   ],
                                 ),
                                 const SizedBox(height: 24),
-                                Serverdetailitem(label: 'USERNAME', value: context.watch<ServerControlProvider>().username),
+                                Serverdetailitem(label: 'COMPUTER NAME', value: ComputerInfoServices.computerName),
+                                Serverdetailitem(label: 'CLIENTS CONNECTED', value: '${provider.clientsConnected}'),
+                                Serverdetailitem(label: 'LOCAL IP ADDRESS', value:provider.localIp),
                                 Serverdetailitem(label: 'SERVER TYPE', value: 'STANDALONE .EXE'),
                                 Serverdetailitem(label: 'STATUS', value: provider.isRunning ? 'RUNNING' : 'STOPPED'),
-                                Serverdetailitem(label: 'CLIENTS CONNECTED', value: '${provider.clientsConnected}'),
+                                Serverdetailitem(label: 'USERNAME', value: ComputerInfoServices.userName),
                               ],
                             ),
                           ),

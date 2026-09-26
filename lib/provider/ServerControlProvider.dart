@@ -1,19 +1,19 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:print_queue_control/core/services/computer_info_services.dart';
 
 class ServerControlProvider extends ChangeNotifier {
   Process? _process;
   bool _isRunning = false;
   int _clientsConnected = 0;
   final List<String> _logs = [];
-  final String _username = Platform.environment['USERNAME'] ?? 'UNKNOWN';
-  
+  String _localIp = 'Loading...';
 
   bool get isRunning => _isRunning;
   int get clientsConnected => _clientsConnected;
   List<String> get logs => List.unmodifiable(_logs);
-  String get username => _username;
+  String get localIp => _localIp;
 
   void _addLog(String message) {
     final timestamp = DateTime.now().toString().split(' ')[1].substring(0, 8);
@@ -31,9 +31,11 @@ class ServerControlProvider extends ChangeNotifier {
       _process = await Process.start('print-server.exe', [], runInShell: true);
       _isRunning = true;
       _clientsConnected = 1;
+      final ipaddress = await ComputerInfoServices.getLocalIp();
       notifyListeners();
 
       _addLog('System started...'.toUpperCase());
+      _addLog('IP ADDRESS: ${ipaddress}'.toUpperCase());
       _addLog('PrintQueue server active on port 3000.'.toUpperCase());
 
       _process?.stdout.transform(utf8.decoder).listen((data) {
@@ -67,10 +69,15 @@ class ServerControlProvider extends ChangeNotifier {
 
       _isRunning = false;
       _clientsConnected = 0;
-      _addLog('Server process stopped by ${_username.toString()}.'.toUpperCase());
+      _addLog('Server process stopped by ${ComputerInfoServices.userName}.'.toUpperCase());
       notifyListeners();
     } catch (e) {
       _addLog('Error stopping process: $e'.toUpperCase());
     }
+  }
+
+  Future<void> loadComputerIpAddress() async {
+      _localIp = await ComputerInfoServices.getLocalIp() ?? 'Not available';
+      notifyListeners();
   }
 }
