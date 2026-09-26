@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:print_queue_control/core/services/window_service.dart';
 import 'package:provider/provider.dart';
 import 'home/ServerControlDashboard.dart';
 import 'provider/ServerControlProvider.dart';
 
 void main() {
+  
+  WindowService.windowsOption(
+    size: const Size(1280, 720),
+    title: 'PRINTSERVER CONTROL CENTER',
+    resizable: false, // Dili ma-resize
+  );
   runApp(
     ChangeNotifierProvider(
       create: (_) => ServerControlProvider(),

@@ -19,7 +19,7 @@ class WindowService {
     String title = 'PRINTSERVER CONTROL CENTER',
     bool resizable = false,
   }) async {
-
+    
     _widgetFlutterBinding();
     _ensureInitializedWindow();
 
