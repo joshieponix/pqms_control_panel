@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:print_queue_control/core/services/google_font_service.dart';
 import 'package:provider/provider.dart';
-import 'package:window_manager/window_manager.dart';
 import '../provider/ServerControlProvider.dart';
 import '../shared/widget/ServerControlButton .dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class ServerControlDashboard extends StatefulWidget {
   const ServerControlDashboard({super.key});
