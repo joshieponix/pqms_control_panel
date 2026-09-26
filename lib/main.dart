@@ -5,9 +5,6 @@ import 'home/ServerControlDashboard.dart';
 import 'provider/ServerControlProvider.dart';
 
 void main() {
-
- 
-  
   WindowService.windowsOption(
     size: const Size(1280, 720),
     title: 'PRINTSERVER CONTROL CENTER',
@@ -15,7 +12,8 @@ void main() {
   );
   runApp(
     ChangeNotifierProvider(
-      create: (_) => ServerControlProvider(),
+      create: (_) => ServerControlProvider()
+      ..loadComputerIpAddress(),
       child: const PrintServerControlApp(),
     ),
   );

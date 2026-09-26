@@ -28,20 +28,12 @@ class _ServerControlDashboardState extends State<ServerControlDashboard> {
     });
   }
 
-
-@override
-void initState() {
-  super.initState();
-  context.read<ServerControlProvider>().loadComputerIpAddress();
-}
-
   @override
   void dispose() {
     _scrollController.dispose();
     super.dispose();
   }
 
- 
 
   @override
   Widget build(BuildContext context) {
