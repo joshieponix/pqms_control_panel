@@ -25,7 +25,7 @@ class PrintServerControlApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'PRINTSERVER CONTROL CENTER',
+      title: 'PQMS CONTROL PANEL',
       debugShowCheckedModeBanner: false,
       theme: ThemeData.dark().copyWith(
         scaffoldBackgroundColor: const Color(0xFF18191C),

@@ -24,7 +24,7 @@ class ServerControlProvider extends ChangeNotifier {
   Future<void> startServer() async {
     if (_isRunning) return;
 
-   
+     
 
     try {
       _addLog('Attempting to start PrintQueue Server...'.toUpperCase());
@@ -33,7 +33,7 @@ class ServerControlProvider extends ChangeNotifier {
       _clientsConnected = 1;
       notifyListeners();
 
-      _addLog('System started (Node.js/PKG).'.toUpperCase());
+      _addLog('System started...'.toUpperCase());
       _addLog('PrintQueue server active on port 3000.'.toUpperCase());
 
       _process?.stdout.transform(utf8.decoder).listen((data) {
