@@ -162,7 +162,6 @@ class _ServerControlDashboardState extends State<ServerControlDashboard> {
                                 const SizedBox(height: 24),
                                 Serverdetailitem(label: 'COMPUTER NAME', value: ComputerInfoServices.computerName),
                                 Serverdetailitem(label: 'LOCAL IP ADDRESS', value:provider.localIp),
-                                Serverdetailitem(label: 'SERVER TYPE', value: 'STANDALONE .EXE'),
                                 Serverdetailitem(label: 'STATUS', value: provider.isRunning ? 'RUNNING' : 'STOPPED'),
                                 Serverdetailitem(label: 'USERNAME', value: ComputerInfoServices.userName),
                               ],
