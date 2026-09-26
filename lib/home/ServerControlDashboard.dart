@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:print_queue_control/core/services/google_font_service.dart';
+import 'package:print_queue_control/shared/widget/ServerDetailItem.dart';
 import 'package:provider/provider.dart';
 import '../provider/ServerControlProvider.dart';
 import '../shared/widget/ServerControlButton .dart';
@@ -104,11 +105,6 @@ class _ServerControlDashboardState extends State<ServerControlDashboard> {
                           PoppinsfontWeight: FontWeight.bold,
                           Poppinsfontsize: 20
                         )
-                        // const TextStyle(
-                        //   fontSize: 20,
-                        //   fontWeight: FontWeight.bold,
-                        //   color: Colors.white,
-                        // ),
                       ),
                     ],
                   ),
@@ -164,19 +160,9 @@ class _ServerControlDashboardState extends State<ServerControlDashboard> {
                                   ],
                                 ),
                                 const SizedBox(height: 24),
-                                _buildDetailItem(
-                                  'Server Type:',
-                                  'Standalone .EXE',
-                                ),
-                                _buildDetailItem(
-                                  'Status:',
-                                  provider.isRunning ? 'Running' : 'Stopped',
-                                ),
-                                _buildDetailItem('Port:', '3000'),
-                                _buildDetailItem(
-                                  'Clients Connected:',
-                                  '${provider.clientsConnected}',
-                                ),
+                                Serverdetailitem(label: 'SERVER TYPE', value: 'STANDALONE .EXE'),
+                                Serverdetailitem(label: 'STATUS', value: provider.isRunning ? 'Running' : 'Stopped'),
+                                Serverdetailitem(label: 'CLIENTS CONNECTED', value: '${provider.clientsConnected}')
                               ],
                             ),
                           ),
@@ -287,29 +273,6 @@ class _ServerControlDashboardState extends State<ServerControlDashboard> {
                   ),
                 ],
               ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildDetailItem(String label, String value) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 6.0),
-      child: Row(
-        children: [
-          Text(
-            label,
-            style: const TextStyle(color: Colors.white70, fontSize: 13),
-          ),
-          const SizedBox(width: 8),
-          Text(
-            value,
-            style: const TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-              fontSize: 13,
             ),
           ),
         ],
