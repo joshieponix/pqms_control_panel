@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:print_queue_control/core/services/google_font_service.dart';
 import 'package:provider/provider.dart';
+import 'package:window_manager/window_manager.dart';
 import '../provider/ServerControlProvider.dart';
 import '../shared/widget/ServerControlButton .dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -12,7 +13,7 @@ class ServerControlDashboard extends StatefulWidget {
   State<ServerControlDashboard> createState() => _ServerControlDashboardState();
 }
 
-class _ServerControlDashboardState extends State<ServerControlDashboard> {
+class _ServerControlDashboardState extends State<ServerControlDashboard> with WindowListener {
   final ScrollController _scrollController = ScrollController();
 
   void _scrollToBottom() {
@@ -31,6 +32,44 @@ class _ServerControlDashboardState extends State<ServerControlDashboard> {
   void dispose() {
     _scrollController.dispose();
     super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    // Register the listener
+    windowManager.addListener(this);
+  }
+
+
+
+  // Intercept the close button press
+  @override
+  void onWindowClose() async {
+    bool isPreventClose = await windowManager.isPreventClose();
+    if (isPreventClose && mounted) {
+      showDialog(
+        context: context,
+        builder: (_) => AlertDialog(
+          title: const Text('Confirm Exit'),
+          content: const Text('Are you sure you want to exit the PrintServer?'),
+          actions: [
+            TextButton(
+              child: const Text('Cancel'),
+              onPressed: () => Navigator.of(context).pop(),
+            ),
+            TextButton(
+              child: const Text('Exit'),
+              onPressed: () async {
+                Navigator.of(context).pop();
+                // Destroy the window completely
+                await windowManager.destroy();
+              },
+            ),
+          ],
+        ),
+      );
+    }
   }
 
   @override
