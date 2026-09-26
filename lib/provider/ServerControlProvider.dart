@@ -33,7 +33,7 @@ class ServerControlProvider extends ChangeNotifier {
       notifyListeners();
 
       _addLog('System started...'.toUpperCase());
-      _addLog('IP ADDRESS: ${ipaddress}'.toUpperCase());
+      _addLog('Server is running on: http://${ipaddress}:3000/');
       _addLog('pqms control panel server active on port 3000.'.toUpperCase());
 
       _process?.stdout.transform(utf8.decoder).listen((data) {
