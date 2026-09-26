@@ -34,7 +34,7 @@ class ServerControlProvider extends ChangeNotifier {
 
       _addLog('System started...'.toUpperCase());
       _addLog('IP ADDRESS: ${ipaddress}'.toUpperCase());
-      _addLog('PrintQueue server active on port 3000.'.toUpperCase());
+      _addLog('pqms control panel server active on port 3000.'.toUpperCase());
 
       _process?.stdout.transform(utf8.decoder).listen((data) {
         final lines = data.trim().split('\n');
