@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:window_manager/window_manager.dart';
 
-
-
-
 class WindowService {
 
  static void _widgetFlutterBinding(){

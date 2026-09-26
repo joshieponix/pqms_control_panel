@@ -10,6 +10,7 @@ class GoogleFontServices{
     Color? PoppinsColor
    }){
       GoogleFonts.poppins(
+        fontStyle: FontStyle.italic,
         fontSize: Poppinsfontsize,
         fontWeight:PoppinsfontWeight,
         color: PoppinsColor,

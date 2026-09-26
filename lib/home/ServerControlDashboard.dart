@@ -54,7 +54,7 @@ class _ServerControlDashboardState extends State<ServerControlDashboard> {
                 Icon(Icons.print_outlined, color: Colors.white70, size: 20),
                 SizedBox(width: 8),
                 Text(
-                  'PRINTSERVER CONTROL CENTER',
+                  'PQMS CONTROL PANEL',
                   style: GoogleFontServices.Poppins(
                     PoppinsColor: Colors.white,
                     PoppinsfontWeight: FontWeight.bold,
@@ -278,7 +278,7 @@ class _ServerControlDashboardState extends State<ServerControlDashboard> {
                   // FOOTER
                   Center(
                     child: Text(
-                      'PQMS CONTROL PANEL Version: v1.0.0 | © 2026 Print Queue Managment System',
+                      'PQMS CONTROL PANEL Version: v1.0.0 | © 2026 PRINT QUEUE MANAGMENT SYSTEM',
                       style: GoogleFontServices.Poppins(
                         PoppinsColor: Colors.white38,
                         Poppinsfontsize: 14,
