@@ -49,18 +49,24 @@ class _ServerControlDashboardState extends State<ServerControlDashboard> {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
             color: const Color(0xFF111215),
-            child: const Row(
+            child: Row(
               children: [
                 Icon(Icons.print_outlined, color: Colors.white70, size: 20),
                 SizedBox(width: 8),
                 Text(
                   'PRINTSERVER CONTROL CENTER',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 1.1,
-                    fontSize: 14,
-                    color: Colors.white,
-                  ),
+                  style: GoogleFontServices.Poppins(
+                    PoppinsColor: Colors.white,
+                    PoppinsfontWeight: FontWeight.bold,
+                    Poppinsfontsize: 14,
+                    PoppinsSpacing: 1.1
+                  )
+                  // TextStyle(
+                  //   fontWeight: FontWeight.bold,
+                  //   letterSpacing: 1.1,
+                  //   fontSize: 14,
+                  //   color: Colors.white,
+                  // ),
                 ),
                 Spacer(),
               ],

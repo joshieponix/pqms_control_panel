@@ -5,16 +5,18 @@ class GoogleFontServices{
 
    static  Poppins({
     double? Poppinsfontsize,
+    double? PoppinsSpacing,
     FontWeight? PoppinsfontWeight,
     Color? PoppinsColor
    }){
       GoogleFonts.poppins(
         fontSize: Poppinsfontsize,
         fontWeight:PoppinsfontWeight,
-        color: PoppinsColor
+        color: PoppinsColor,
+        letterSpacing: PoppinsSpacing
       );
    }
 
-   
+
 
 }
