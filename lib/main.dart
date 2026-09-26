@@ -7,7 +7,7 @@ import 'provider/ServerControlProvider.dart';
 void main() {
   WindowService.windowsOption(
     size: const Size(1280, 720),
-    title: 'PRINTSERVER CONTROL CENTER',
+    title: 'PQMS CONTROL PANEL',
     resizable: false, // Dili ma-resize
   );
   runApp(
