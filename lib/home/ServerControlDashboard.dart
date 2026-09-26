@@ -13,7 +13,7 @@ class ServerControlDashboard extends StatefulWidget {
   State<ServerControlDashboard> createState() => _ServerControlDashboardState();
 }
 
-class _ServerControlDashboardState extends State<ServerControlDashboard> with WindowListener {
+class _ServerControlDashboardState extends State<ServerControlDashboard> {
   final ScrollController _scrollController = ScrollController();
 
   void _scrollToBottom() {
@@ -34,43 +34,7 @@ class _ServerControlDashboardState extends State<ServerControlDashboard> with Wi
     super.dispose();
   }
 
-  @override
-  void initState() {
-    super.initState();
-    // Register the listener
-    windowManager.addListener(this);
-  }
-
-
-
-  // Intercept the close button press
-  @override
-  void onWindowClose() async {
-    bool isPreventClose = await windowManager.isPreventClose();
-    if (isPreventClose && mounted) {
-      showDialog(
-        context: context,
-        builder: (_) => AlertDialog(
-          title: const Text('Confirm Exit'),
-          content: const Text('Are you sure you want to exit the PrintServer?'),
-          actions: [
-            TextButton(
-              child: const Text('Cancel'),
-              onPressed: () => Navigator.of(context).pop(),
-            ),
-            TextButton(
-              child: const Text('Exit'),
-              onPressed: () async {
-                Navigator.of(context).pop();
-                // Destroy the window completely
-                await windowManager.destroy();
-              },
-            ),
-          ],
-        ),
-      );
-    }
-  }
+ 
 
   @override
   Widget build(BuildContext context) {

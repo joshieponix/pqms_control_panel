@@ -44,7 +44,7 @@ class WindowService {
         await windowManager.show();
         await windowManager.focus();
         await windowManager.setResizable(isResizable);
-        await windowManager.setPreventClose(true);
+        // await windowManager.setPreventClose(true);
       });
   }
 
