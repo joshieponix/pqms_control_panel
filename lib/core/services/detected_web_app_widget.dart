@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:print_queue_control/core/services/google_font_service.dart';
 
 class DetectedWebAppsWidget extends StatelessWidget {
   final List<String> webAppUrls;
@@ -16,15 +17,15 @@ class DetectedWebAppsWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SizedBox(height: 12),
-        const Text(
+        Text(
           'DETECTED WEB APPS:',
-          style: TextStyle(color: Colors.white70, fontWeight: FontWeight.bold),
+          style: GoogleFontServices.Poppins(PoppinsColor:Colors.white70, PoppinsfontWeight:FontWeight.bold),
         ),
         const SizedBox(height: 6),
         if (webAppUrls.isEmpty)
-          const Text(
+        Text(
             'No Web Apps Detected',
-            style: TextStyle(color: Colors.grey),
+            style: GoogleFontServices.Poppins(PoppinsColor:Colors.grey)
           )
         else
           Column(
@@ -37,10 +38,7 @@ class DetectedWebAppsWidget extends StatelessWidget {
                   borderRadius: BorderRadius.circular(4),
                   child: SelectableText(
                     url,
-                    style: const TextStyle(
-                      color: Colors.greenAccent,
-                      decoration: TextDecoration.underline,
-                    ),
+                    style: GoogleFontServices.Poppins(PoppinsColor:Colors.greenAccent, PoppinsDecoration: TextDecoration.underline)
                   ),
                 ),
               );

@@ -7,14 +7,16 @@ class GoogleFontServices{
     double? Poppinsfontsize,
     double? PoppinsSpacing,
     FontWeight? PoppinsfontWeight,
-    Color? PoppinsColor
+    Color? PoppinsColor,
+    TextDecoration? PoppinsDecoration
    }){
       GoogleFonts.poppins(
         fontStyle: FontStyle.italic,
         fontSize: Poppinsfontsize,
         fontWeight:PoppinsfontWeight,
         color: PoppinsColor,
-        letterSpacing: PoppinsSpacing
+        letterSpacing: PoppinsSpacing,
+        decoration: PoppinsDecoration
       );
    }
 
