@@ -11,7 +11,6 @@ class GoogleFontServices{
     TextDecoration? PoppinsDecoration
    }){
       GoogleFonts.poppins(
-        fontStyle: FontStyle.italic,
         fontSize: Poppinsfontsize,
         fontWeight:PoppinsfontWeight,
         color: PoppinsColor,

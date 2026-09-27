@@ -176,11 +176,11 @@ class _ServerControlDashboardState extends State<ServerControlDashboard> {
 
                                       // DETAILS
                                       Serverdetailitem(
-                                        label: 'LOCAL IP ADDRESS',
+                                        label: 'LOCAL IP ADDRESS:',
                                         value: provider.localIp,
                                       ),
                                       Serverdetailitem(
-                                        label: 'STATUS',
+                                        label: 'STATUS:',
                                         value: provider.isRunning
                                             ? 'RUNNING'
                                             : 'STOPPED',

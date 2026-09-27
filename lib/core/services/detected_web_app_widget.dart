@@ -25,7 +25,7 @@ class DetectedWebAppsWidget extends StatelessWidget {
         if (webAppUrls.isEmpty)
         Text(
             'No Web Apps Detected',
-            style: GoogleFontServices.Poppins(PoppinsColor:Colors.grey)
+            style: TextStyle(color: Colors.grey)
           )
         else
           Column(
