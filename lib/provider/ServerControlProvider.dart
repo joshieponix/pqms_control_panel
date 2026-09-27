@@ -12,12 +12,14 @@ class ServerControlProvider extends ChangeNotifier {
   bool _isChecking = true;
   int _clientsConnected = 0;
   final List<String> _logs = [];
-  String _localIp = 'Loading...';
+  List<String> _webAppUrls = [];
+  String _localIp = '127.0.0.1';
 
   bool get isRunning => _isRunning;
   bool get isChecking => _isChecking;
   int get clientsConnected => _clientsConnected;
   List<String> get logs => List.unmodifiable(_logs);
+  List<String> get webAppUrls => _webAppUrls;
   String get localIp => _localIp;
 
 
@@ -37,12 +39,11 @@ class ServerControlProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-
   Future<void> checkServerStatus() async{
     _isChecking = true;
      notifyListeners();
     try {
-      final ipaddress = await ComputerInfoServices.getLocalIp();
+      dynamic ipaddress = await ComputerInfoServices.getLocalIp();
       final serverUrl = 'http://$ipaddress:3000/api/status';
       final response = await http.get(Uri.parse(serverUrl))
       .timeout(const Duration(seconds: 2));
@@ -50,6 +51,7 @@ class ServerControlProvider extends ChangeNotifier {
       if (response.statusCode == 200){
         _isRunning = true;
         _addLog('DETECTED EXISTING PQMS CONTROL PANEL SERVER RUNNING ON http://$ipaddress:3000 .');
+        await fetchServerDetails();
         notifyListeners();
       }else {
         _isRunning = false;
@@ -59,7 +61,28 @@ class ServerControlProvider extends ChangeNotifier {
       notifyListeners();
     }finally {
       _isChecking = false;
-      notifyListeners(); // I-notify ang UI para mag-change sa STOP button
+      notifyListeners();
+    }
+  }
+
+    Future<void> fetchServerDetails() async {
+    try {
+      final url = 'http://$_localIp:3000/api/info';
+      final response = await http
+          .get(Uri.parse(url))
+          .timeout(const Duration(seconds: 2));
+
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        _localIp = data['ip'] ?? '127.0.0.1';
+        _webAppUrls = List<String>.from(data['urls'] ?? []);
+
+        for (var url in _webAppUrls) {
+          _addLog('DETECTED WEB APP: $url');
+        }
+      }
+    } catch (e) {
+      _addLog('ERROR FETCHING SERVER INFO: $e');
     }
   }
 
@@ -71,9 +94,10 @@ class ServerControlProvider extends ChangeNotifier {
       _process = await Process.start('${Directory.current.path}\\print-server.exe', [], runInShell: true);
       _isRunning = true;
       _clientsConnected = 1;
-      final ipaddress = await ComputerInfoServices.getLocalIp();
-      final serverUrl = 'http://$ipaddress:3000/operator.html';
+      final serverUrl = 'http://$_localIp:3000/operator.html';
       notifyListeners();
+      await Future.delayed(const Duration(seconds: 1));
+      await fetchServerDetails();
 
       _addLog('System started...'.toUpperCase());
       _addLog('Server is running on: ${serverUrl}');
@@ -112,6 +136,7 @@ class ServerControlProvider extends ChangeNotifier {
 
       _isRunning = false;
       _clientsConnected = 0;
+      _webAppUrls.clear();
       _addLog('Server process stopped by ${ComputerInfoServices.userName}.'.toUpperCase());
       notifyListeners();
     } catch (e) {
