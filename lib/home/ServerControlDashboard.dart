@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:print_queue_control/core/services/detected_web_app_widget.dart';
 import 'package:print_queue_control/core/services/google_font_service.dart';
 import 'package:print_queue_control/core/services/loader_skeletonizer.dart';
+import 'package:print_queue_control/core/services/url_launcher_services.dart';
 import 'package:print_queue_control/shared/widget/ServerDetailItem.dart';
 import 'package:provider/provider.dart';
 import '../provider/ServerControlProvider.dart';
@@ -183,32 +185,7 @@ class _ServerControlDashboardState extends State<ServerControlDashboard> {
                                             ? 'RUNNING'
                                             : 'STOPPED',
                                       ),
-                                      const SizedBox(height: 12),
-                                        const Text(
-                                          'DETECTED WEB APPS:',
-                                          style: TextStyle(color: Colors.white70, fontWeight: FontWeight.bold),
-                                        ),
-                                        const SizedBox(height: 6),
-                                        
-                                        // Dynamic list ng mga Auto-detected URLs (tulad ng http://172.17.0.132:3000/operator.html)
-                                        if (provider.webAppUrls.isEmpty)
-                                          const Text('No Web Apps Detected', style: TextStyle(color: Colors.grey))
-                                        else
-                                          Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            children: provider.webAppUrls.map((url) {
-                                              return Padding(
-                                                padding: const EdgeInsets.symmetric(vertical: 2.0),
-                                                child: SelectableText(
-                                                  url,
-                                                  style: const TextStyle(
-                                                    color: Colors.greenAccent,
-                                                    decoration: TextDecoration.underline,
-                                                  ),
-                                                ),
-                                              );
-                                            }).toList(),
-                                          ),
+                                     DetectedWebAppsWidget(webAppUrls: provider.webAppUrls,onUrlTap: (url)=> UrlLauncherServices.urlLauncher(url))
                                     ],
                                   ),
                                 ),

@@ -27,10 +27,10 @@ class _ServerdetailitemState extends State<Serverdetailitem> {
           const SizedBox(width: 8),
           Text(
             widget.value,
-            style: const TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-              fontSize: 13,
+            style: GoogleFontServices.Poppins(
+              PoppinsColor: Colors.white,
+              PoppinsfontWeight: FontWeight.bold,
+              Poppinsfontsize: 13,
             ),
           ),
         ],
