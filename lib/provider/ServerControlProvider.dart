@@ -9,11 +9,13 @@ import 'package:http/http.dart' as http;
 class ServerControlProvider extends ChangeNotifier {
   Process? _process;
   bool _isRunning = false;
+  bool _isChecking = true;
   int _clientsConnected = 0;
   final List<String> _logs = [];
   String _localIp = 'Loading...';
 
   bool get isRunning => _isRunning;
+  bool get isChecking => _isChecking;
   int get clientsConnected => _clientsConnected;
   List<String> get logs => List.unmodifiable(_logs);
   String get localIp => _localIp;
@@ -25,6 +27,8 @@ class ServerControlProvider extends ChangeNotifier {
   }
 
   Future<void> checkServerStatus() async{
+    _isChecking = true;
+     notifyListeners();
     try {
       final ipaddress = await ComputerInfoServices.getLocalIp();
       final serverUrl = 'http://$ipaddress:3000/';
@@ -35,10 +39,15 @@ class ServerControlProvider extends ChangeNotifier {
         _isRunning = true;
         _addLog('DETECTED EXISTING PRINT SERVER RUNNING ON PORT 3000.');
         notifyListeners();
+      }else {
+        _isRunning = false;
       }
     } catch (e) {
       _isRunning = false;
       notifyListeners();
+    }finally {
+      _isChecking = false;
+      notifyListeners(); // I-notify ang UI para mag-change sa STOP button
     }
   }
 
