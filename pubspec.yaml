@@ -38,6 +38,8 @@ dependencies:
   window_manager: ^0.5.2
   google_fonts: ^8.2.1
   url_launcher: ^6.3.2
+  http: ^1.6.0
+  skeletonizer: ^3.0.0
 
 dev_dependencies:
   flutter_test:

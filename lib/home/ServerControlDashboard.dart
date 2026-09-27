@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:print_queue_control/core/services/google_font_service.dart';
+import 'package:print_queue_control/core/services/loader_skeletonizer.dart';
 import 'package:print_queue_control/shared/widget/ServerDetailItem.dart';
 import 'package:provider/provider.dart';
 import '../provider/ServerControlProvider.dart';
@@ -33,12 +34,11 @@ class _ServerControlDashboardState extends State<ServerControlDashboard> {
     super.dispose();
   }
 
-
   @override
   Widget build(BuildContext context) {
     // context.watch ensures the widget rebuilds when state changes
     final provider = context.watch<ServerControlProvider>();
-   
+
     // Scroll down automatically whenever logs update
     _scrollToBottom();
 
@@ -51,7 +51,11 @@ class _ServerControlDashboardState extends State<ServerControlDashboard> {
             color: const Color(0xFF111215),
             child: Row(
               children: [
-                Icon(Icons.admin_panel_settings, color: Colors.white70, size: 20),
+                Icon(
+                  Icons.admin_panel_settings,
+                  color: Colors.white70,
+                  size: 20,
+                ),
                 SizedBox(width: 8),
                 Text(
                   'PQMS CONTROL PANEL',
@@ -59,8 +63,8 @@ class _ServerControlDashboardState extends State<ServerControlDashboard> {
                     PoppinsColor: Colors.white,
                     PoppinsfontWeight: FontWeight.bold,
                     Poppinsfontsize: 14,
-                    PoppinsSpacing: 1.1
-                  )
+                    PoppinsSpacing: 1.1,
+                  ),
                 ),
                 Spacer(),
               ],
@@ -86,10 +90,11 @@ class _ServerControlDashboardState extends State<ServerControlDashboard> {
                               : const Color(0xFFFF4D4D),
                           boxShadow: [
                             BoxShadow(
-                              color: (provider.isRunning
-                                      ? const Color(0xFF39E55A)
-                                      : const Color(0xFFFF4D4D))
-                                  .withOpacity(0.5),
+                              color:
+                                  (provider.isRunning
+                                          ? const Color(0xFF39E55A)
+                                          : const Color(0xFFFF4D4D))
+                                      .withOpacity(0.5),
                               blurRadius: 10,
                               spreadRadius: 2,
                             ),
@@ -102,8 +107,8 @@ class _ServerControlDashboardState extends State<ServerControlDashboard> {
                         style: GoogleFontServices.Poppins(
                           PoppinsColor: Colors.white,
                           PoppinsfontWeight: FontWeight.bold,
-                          Poppinsfontsize: 20
-                        )
+                          Poppinsfontsize: 20,
+                        ),
                       ),
                     ],
                   ),
@@ -115,57 +120,76 @@ class _ServerControlDashboardState extends State<ServerControlDashboard> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         // LEFT PANEL: CONTROLS
-                        Expanded(
-                          flex: 5,
-                          child: Container(
-                            padding: const EdgeInsets.all(20),
-                            decoration: BoxDecoration(
-                              color: const Color(0xFF22242A),
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const Text(
-                                  'CONTROLS',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 14,
-                                    color: Colors.white70,
+                        Consumer<ServerControlProvider>(
+                          builder: (context, provider, child) {
+                            return Expanded(
+                              flex: 5,
+                              child: LoaderSkeletonizer(
+                                isLoading: provider.isChecking,
+                                child: Container(
+                                  padding: const EdgeInsets.all(20),
+                                  decoration: BoxDecoration(
+                                    color: const Color(0xFF22242A),
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      const Text(
+                                        'CONTROLS',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 14,
+                                          color: Colors.white70,
+                                        ),
+                                      ),
+                                      const SizedBox(height: 16),
+
+                                      // BUTTONS ROW
+                                      Row(
+                                        children: [
+                                          ServerControlButton(
+                                            icon: Icons.play_arrow,
+                                            text: 'START',
+                                            isRunning: provider.isRunning,
+                                            isStartButton: true,
+                                            onPressed: provider.isRunning
+                                                ? null
+                                                : provider.startServer,
+                                          ),
+                                          const SizedBox(width: 12),
+                                          ServerControlButton(
+                                            icon: Icons.stop,
+                                            text: 'STOP',
+                                            isRunning: provider.isRunning,
+                                            isStartButton: false,
+                                            onPressed: provider.isRunning
+                                                ? provider.stopServer
+                                                : null,
+                                          ),
+                                        ],
+                                      ),
+                                      const SizedBox(height: 24),
+
+                                      // DETAILS
+                                      Serverdetailitem(
+                                        label: 'LOCAL IP ADDRESS',
+                                        value: provider.localIp,
+                                      ),
+                                      Serverdetailitem(
+                                        label: 'STATUS',
+                                        value: provider.isRunning
+                                            ? 'RUNNING'
+                                            : 'STOPPED',
+                                      ),
+                                    ],
                                   ),
                                 ),
-                                const SizedBox(height: 16),
-                                Row(
-                                  children: [
-                                    ServerControlButton(
-                                      icon: Icons.play_arrow,
-                                      text: 'START',
-                                      isRunning: provider.isRunning,
-                                      isStartButton: true,
-                                      onPressed: provider.isRunning
-                                          ? null
-                                          : provider.startServer,
-                                    ),
-                                    const SizedBox(width: 12),
-                                    ServerControlButton(
-                                      icon: Icons.stop,
-                                      text: 'STOP',
-                                      isRunning: provider.isRunning,
-                                      isStartButton: false,
-                                      onPressed: provider.isRunning
-                                          ? provider.stopServer
-                                          : null,
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(height: 24),
-                                Serverdetailitem(label: 'LOCAL IP ADDRESS', value:provider.localIp),
-                                Serverdetailitem(label: 'STATUS', value: provider.isRunning ? 'RUNNING' : 'STOPPED'),
-                              ],
-                            ),
-                          ),
+                              ),
+                            );
+                          },
                         ),
-
                         const SizedBox(width: 20),
 
                         // RIGHT PANEL: TERMINAL LOGS
@@ -180,7 +204,7 @@ class _ServerControlDashboardState extends State<ServerControlDashboard> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                 Row(
+                                Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
@@ -190,11 +214,11 @@ class _ServerControlDashboardState extends State<ServerControlDashboard> {
                                       children: [
                                         Text(
                                           'REAL-TIME LOGS',
-                                          style:  GoogleFontServices.Poppins(
+                                          style: GoogleFontServices.Poppins(
                                             PoppinsColor: Colors.white70,
                                             PoppinsfontWeight: FontWeight.bold,
-                                            Poppinsfontsize: 14
-                                          )
+                                            Poppinsfontsize: 14,
+                                          ),
                                         ),
                                       ],
                                     ),
@@ -213,9 +237,7 @@ class _ServerControlDashboardState extends State<ServerControlDashboard> {
                                     decoration: BoxDecoration(
                                       color: const Color(0xFF141518),
                                       borderRadius: BorderRadius.circular(8),
-                                      border: Border.all(
-                                        color: Colors.white10,
-                                      ),
+                                      border: Border.all(color: Colors.white10),
                                     ),
                                     child: ListView.builder(
                                       controller: _scrollController,

@@ -20,24 +20,36 @@ class ServerControlProvider extends ChangeNotifier {
   List<String> get logs => List.unmodifiable(_logs);
   String get localIp => _localIp;
 
+
+  ServerControlProvider(){
+    initProvider();
+  }
+
+    Future<void> initProvider() async {
+        await loadComputerIpAddress();
+        await checkServerStatus();
+    }
+
+
   void _addLog(String message) {
     final timestamp = DateTime.now().toString().split(' ')[1].substring(0, 8);
     _logs.add('[$timestamp] $message');
     notifyListeners();
   }
 
+
   Future<void> checkServerStatus() async{
     _isChecking = true;
      notifyListeners();
     try {
       final ipaddress = await ComputerInfoServices.getLocalIp();
-      final serverUrl = 'http://$ipaddress:3000/';
+      final serverUrl = 'http://$ipaddress:3000/api/status';
       final response = await http.get(Uri.parse(serverUrl))
       .timeout(const Duration(seconds: 2));
 
       if (response.statusCode == 200){
         _isRunning = true;
-        _addLog('DETECTED EXISTING PRINT SERVER RUNNING ON PORT 3000.');
+        _addLog('DETECTED EXISTING PQMS CONTROL PANEL SERVER RUNNING ON http://$ipaddress:3000 .');
         notifyListeners();
       }else {
         _isRunning = false;
@@ -60,7 +72,7 @@ class ServerControlProvider extends ChangeNotifier {
       _isRunning = true;
       _clientsConnected = 1;
       final ipaddress = await ComputerInfoServices.getLocalIp();
-      final serverUrl = 'http://$ipaddress:3000/';
+      final serverUrl = 'http://$ipaddress:3000/operator.html';
       notifyListeners();
 
       _addLog('System started...'.toUpperCase());

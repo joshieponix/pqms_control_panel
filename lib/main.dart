@@ -12,9 +12,7 @@ void main() {
   );
   runApp(
     ChangeNotifierProvider(
-      create: (_) => ServerControlProvider()
-      ..loadComputerIpAddress()
-      ..checkServerStatus(),
+      create: (_) => ServerControlProvider(),
       child: const PrintServerControlApp(),
     ),
   );
