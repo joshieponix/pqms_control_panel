@@ -14,11 +14,10 @@ class ComputerInfoServices {
           for (final address in interface.addresses) {
             if (!address.isLoopback){
               return address.address;
-            }else{
-              return '127.0.0.1';
             }
           }
       }
+       return '127.0.0.1';
   }
 
  
