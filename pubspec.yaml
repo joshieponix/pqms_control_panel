@@ -43,7 +43,7 @@ dependencies:
   flutter_launcher_icons: ^0.14.4
 
 flutter_launcher_icons:
-  image_path: "assets/img/pqms.ico" # Path sa imong high-res PNG icon (min 512x512)
+  image_path: "assets/img/pqms.png" # Path sa imong high-res PNG icon (min 512x512)
     
   # Desktop Platforms Config:
   windows:
