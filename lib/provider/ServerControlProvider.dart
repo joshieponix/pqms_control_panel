@@ -41,7 +41,7 @@ class ServerControlProvider extends ChangeNotifier {
     _isChecking = true;
     notifyListeners();
     try {
-      final serverUrl = 'http://$_localIp:3000/api/status';
+      final serverUrl = 'http://$_localIp:${AppConfig.serverPort}/api/status';
       final response = await http
           .get(Uri.parse(serverUrl))
           .timeout(const Duration(seconds: 2));
@@ -49,7 +49,7 @@ class ServerControlProvider extends ChangeNotifier {
       if (response.statusCode == 200) {
         _isRunning = true;
         _addLog(
-          'DETECTED EXISTING PQMS CONTROL PANEL SERVER RUNNING ON http://$_localIp:3000 .',
+          'DETECTED EXISTING PQMS CONTROL PANEL SERVER RUNNING ON http://$_localIp:${AppConfig.serverPort}.',
         );
         await fetchServerDetails();
         notifyListeners();
@@ -67,7 +67,7 @@ class ServerControlProvider extends ChangeNotifier {
 
   Future<void> fetchServerDetails() async {
     try {
-      final url = 'http://$_localIp:3000/api/info';
+      final url = 'http://$_localIp:${AppConfig.serverPort}/api/info';
       final response = await http
           .get(Uri.parse(url),
           headers: {
@@ -120,13 +120,13 @@ class ServerControlProvider extends ChangeNotifier {
             .first;
 
         _addLog('Server is running on: $serverUrl');
-        _addLog('pqms control panel server active on port 3000.'.toUpperCase());
+        _addLog('pqms control panel server active on port ${AppConfig.serverPort}.'.toUpperCase());
 
         // Launch dynamic URL gikan sa webAppUrls
         UrlLauncherServices.urlLauncher(serverUrl);
       } else {
         // Fallback kung walay .html files sa public folder
-        final fallbackUrl = 'http://$_localIp:3000/';
+        final fallbackUrl = 'http://$_localIp:${AppConfig.serverPort}/';
         _addLog('Server is running on: $fallbackUrl (No HTML files detected)');
         UrlLauncherServices.urlLauncher(fallbackUrl);
       }
@@ -159,13 +159,13 @@ class ServerControlProvider extends ChangeNotifier {
   //     _process = await Process.start('${Directory.current.path}\\print-server.exe', [], runInShell: true);
   //     _isRunning = true;
   //     _clientsConnected = 1;
-  //     final serverUrl = "http://$_localIp:3000/";
+  //     final serverUrl = "http://$_localIp:${AppConfig.serverPort}/";
   //     notifyListeners();
   //     await Future.delayed(const Duration(seconds: 1));
   //     await fetchServerDetails();
   //     _addLog('System started...'.toUpperCase());
   //     _addLog('Server is running on: ${serverUrl}');
-  //     _addLog('pqms control panel server active on port 3000.'.toUpperCase());
+  //     _addLog('pqms control panel server active on port ${AppConfig.serverPort}.'.toUpperCase());
 
   //     UrlLauncherServices.urlLauncher(serverUrl);
 
