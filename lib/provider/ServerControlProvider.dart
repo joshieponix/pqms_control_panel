@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:print_queue_control/config/app_config.dart';
 import 'package:print_queue_control/core/services/computer_info_services.dart';
 import 'package:print_queue_control/core/services/url_launcher_services.dart';
 import 'package:http/http.dart' as http;
@@ -71,7 +72,7 @@ class ServerControlProvider extends ChangeNotifier {
           .get(Uri.parse(url),
           headers: {
             'Content-Type': 'application/json',
-            'x-api-key': 'PQMS_SECRET_KEY_2026'
+            'x-api-key': AppConfig.apiKey
           }
         )
           .timeout(const Duration(seconds: 2));
