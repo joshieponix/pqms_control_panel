@@ -68,7 +68,12 @@ class ServerControlProvider extends ChangeNotifier {
     try {
       final url = 'http://$_localIp:3000/api/info';
       final response = await http
-          .get(Uri.parse(url))
+          .get(Uri.parse(url),
+          headers: {
+            'Content-Type': 'application/json',
+            'x-api-key': 'PQMS_SECRET_KEY_2026'
+          }
+        )
           .timeout(const Duration(seconds: 2));
 
       if (response.statusCode == 200) {
