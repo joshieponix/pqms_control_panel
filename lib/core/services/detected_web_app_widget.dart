@@ -38,7 +38,7 @@ class DetectedWebAppsWidget extends StatelessWidget {
                   borderRadius: BorderRadius.circular(4),
                   child: SelectableText(
                     url,
-                    style: GoogleFontServices.Poppins(PoppinsColor:Colors.greenAccent, PoppinsDecoration: TextDecoration.underline)
+                    style: TextStyle(color: Colors.greenAccent, decoration: TextDecoration.underline)
                   ),
                 ),
               );
