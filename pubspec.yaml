@@ -42,6 +42,18 @@ dependencies:
   skeletonizer: ^3.0.0
   flutter_launcher_icons: ^0.14.4
 
+flutter_launcher_icons:
+  image_path: "assets/icon/app_icon.png" # Path sa imong high-res PNG icon (min 512x512)
+    
+  # Desktop Platforms Config:
+  windows:
+    generate: true
+    icon_size: 256 # dako nga resolution para sa Windows (.ico)
+  macos:
+    generate: true
+    linux:
+  generate: true
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
