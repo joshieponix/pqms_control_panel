@@ -11,7 +11,7 @@ const { query, validationResult } = require('express-validator');
 
 const app = express();
 const server = http.createServer(app);
-dotenv.config({path:path.join(process.cwd(), '.env') });
+dotenv.config({path:path.join(process.cwd(), '.env'), quiet:true});
 const io = new Server(server, {
   cors: {
     origin: "*", // Gi-allow ang React/Browser clients
