@@ -69,12 +69,13 @@ class ServerControlProvider extends ChangeNotifier {
     try {
       final url = 'http://$_localIp:${AppConfig.serverPort}/api/info';
       final response = await http
-          .get(Uri.parse(url),
-          headers: {
-            'Content-Type': 'application/json',
-            'x-api-key': AppConfig.apiKey
-          }
-        )
+          .get(
+            Uri.parse(url),
+            headers: {
+              'Content-Type': 'application/json',
+              'x-api-key': AppConfig.apiKey,
+            },
+          )
           .timeout(const Duration(seconds: 2));
 
       if (response.statusCode == 200) {
@@ -96,11 +97,7 @@ class ServerControlProvider extends ChangeNotifier {
 
     try {
       _addLog('Attempting to start PrintQueue Server...'.toUpperCase());
-      _process = await Process.start(
-        AppConfig.filePath,
-        [],
-        runInShell: true,
-      );
+      _process = await Process.start(AppConfig.filePath, [], runInShell: true);
 
       _isRunning = true;
       _clientsConnected = 1;
@@ -116,11 +113,13 @@ class ServerControlProvider extends ChangeNotifier {
 
       // 3. Kwaon ang na-detect nga URL gikan sa _webAppUrls
       if (_webAppUrls.isNotEmpty) {
-        final serverUrl = _webAppUrls
-            .first;
+        final serverUrl = _webAppUrls.first;
 
         _addLog('Server is running on: $serverUrl');
-        _addLog('pqms control panel server active on port ${AppConfig.serverPort}.'.toUpperCase());
+        _addLog(
+          'pqms control panel server active on port ${AppConfig.serverPort}.'
+              .toUpperCase(),
+        );
 
         // Launch dynamic URL gikan sa webAppUrls
         UrlLauncherServices.urlLauncher(serverUrl);
