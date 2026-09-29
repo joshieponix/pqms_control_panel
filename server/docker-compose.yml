@@ -1,0 +1,33 @@
+
+services:
+  # MySQL Database Service
+  mysql-db:
+    image: mysql:8.0
+    container_name: print_queue_mysql
+    restart: always # <-- Mo-auto start ig power on sa PC
+    environment:
+      MYSQL_ROOT_PASSWORD: 20203050
+      MYSQL_DATABASE: test
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql # I-persist ang datos bisan i-restart
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql # Auto-run DB script
+
+  # Node.js + Socket.IO Web App Service
+  web-app:
+    build: .
+    container_name: print_queue_app
+    restart: always # <-- Mo-auto start ig power on sa PC
+    ports:
+      - "3000:3000"
+    environment:
+      DB_HOST: mysql-db
+      DB_USER: root
+      DB_PASSWORD: 20203050
+      DB_NAME: test
+    depends_on:
+      - mysql-db
+
+volumes:
+  db_data:
