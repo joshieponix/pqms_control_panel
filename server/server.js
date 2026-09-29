@@ -5,11 +5,13 @@ const path = require('path');
 const os = require('os'); // <--- BAG-O: Kinahanglan i-import ang 'os' module!
 const fs = require('fs');
 const cors = require('cors');
+const dotenv = require('dotenv');
 const rateLimit = require('express-rate-limit');
 const { query, validationResult } = require('express-validator');
 
 const app = express();
 const server = http.createServer(app);
+dotenv.config({path:path.join(process.cwd(), '.env') });
 const io = new Server(server, {
   cors: {
     origin: "*", // Gi-allow ang React/Browser clients
@@ -20,7 +22,7 @@ const io = new Server(server, {
 
 // NEW ADD SECURITY
 // Set up ug static API Key (Sa production, maayo ibutang kini sa .env file)
-const API_KEY = process.env.API_KEY || 'PQMS_API_KEY_2O26';
+// const API_KEY = process.env.API_KEY;
 
 // ---------------------------------------------------------
 // 1. CORS SECURITY SETUP
@@ -67,7 +69,7 @@ app.use('/api/', apiLimiter);
 // ---------------------------------------------------------
 function authenticateApiKey(req, res, next) {
   const clientApiKey = req.headers['x-api-key'];
-
+  const API_KEY = process.env.API_KEY;
   if (!clientApiKey || clientApiKey !== API_KEY) {
     return res.status(401).json({ error: 'Unauthorized: Invalido o walay API Key.' });
   }
@@ -153,7 +155,8 @@ authenticateApiKey // Require API Key
 ,[
   // Sample Input Sanitization & Validation gamit ang express-validator
     query('filter').optional().trim().escape().isAlphanumeric(),
-], (req, res)=>{
+],
+ (req, res)=>{
     const localIp = getLocalIpAddress();
 
     fs.readdir(publicPath, (err, files)=>{
