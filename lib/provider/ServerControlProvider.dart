@@ -91,17 +91,14 @@ class ServerControlProvider extends ChangeNotifier {
     }
   }
 
-
   Future<void> startServer() async {
     if (_isRunning) return;
 
     try {
       _addLog('Attempting to start PrintQueue Server...'.toUpperCase());
-      final serverDir = '${Directory.current.path}\\server';
       _process = await Process.start(
-        '$serverDir\\print-server.exe',
-       [],
-       workingDirectory: serverDir,
+        AppConfig.filePath,
+        [],
         runInShell: true,
       );
 
@@ -112,7 +109,7 @@ class ServerControlProvider extends ChangeNotifier {
       _addLog('System started...'.toUpperCase());
 
       // 1. Maghulat og 1 second para makadagan og tarong ang Node.js server
-      await Future.delayed(const Duration(seconds: 2));
+      await Future.delayed(const Duration(seconds: 1));
 
       // 2. Tawagon ang fetchServerDetails() para mag-autodetect sa IP ug HTML files gikan sa Express
       await fetchServerDetails();
@@ -154,107 +151,6 @@ class ServerControlProvider extends ChangeNotifier {
       notifyListeners();
     }
   }
-// THIS IS TEMPORARY COMMENT
-  // Future<void> startServer() async {
-  //   if (_isRunning) return;
-
-  //   try {
-  //     _addLog('Attempting to start PrintQueue Server...'.toUpperCase());
-  //     _process = await Process.start(
-  //       '${Directory.current.path}\\print-server.exe',
-  //       [],
-  //       runInShell: true,
-  //     );
-
-  //     _isRunning = true;
-  //     _clientsConnected = 1;
-  //     notifyListeners();
-
-  //     _addLog('System started...'.toUpperCase());
-
-  //     // 1. Maghulat og 1 second para makadagan og tarong ang Node.js server
-  //     await Future.delayed(const Duration(seconds: 1));
-
-  //     // 2. Tawagon ang fetchServerDetails() para mag-autodetect sa IP ug HTML files gikan sa Express
-  //     await fetchServerDetails();
-
-  //     // 3. Kwaon ang na-detect nga URL gikan sa _webAppUrls
-  //     if (_webAppUrls.isNotEmpty) {
-  //       final serverUrl = _webAppUrls
-  //           .first;
-
-  //       _addLog('Server is running on: $serverUrl');
-  //       _addLog('pqms control panel server active on port ${AppConfig.serverPort}.'.toUpperCase());
-
-  //       // Launch dynamic URL gikan sa webAppUrls
-  //       UrlLauncherServices.urlLauncher(serverUrl);
-  //     } else {
-  //       // Fallback kung walay .html files sa public folder
-  //       final fallbackUrl = 'http://$_localIp:${AppConfig.serverPort}/';
-  //       _addLog('Server is running on: $fallbackUrl (No HTML files detected)');
-  //       UrlLauncherServices.urlLauncher(fallbackUrl);
-  //     }
-
-  //     // Process stdout/stderr listeners
-  //     _process?.stdout.transform(utf8.decoder).listen((data) {
-  //       final lines = data.trim().split('\n');
-  //       for (var line in lines) {
-  //         if (line.isNotEmpty) _addLog(line);
-  //       }
-  //     });
-
-  //     _process?.stderr.transform(utf8.decoder).listen((data) {
-  //       final lines = data.trim().split('\n');
-  //       for (var line in lines) {
-  //         if (line.isNotEmpty) _addLog('ERROR: $line'.toUpperCase());
-  //       }
-  //     });
-  //   } catch (e) {
-  //     _addLog('Failed to start server process: $e'.toUpperCase());
-  //     _isRunning = false;
-  //     notifyListeners();
-  //   }
-  // }
-  // END
-
-
-  // Future<void> startServer() async {
-  //   if (_isRunning) return;
-
-  //   try {
-  //     _addLog('Attempting to start PQMS CONTROL PANEL...'.toUpperCase());
-  //     _process = await Process.start('${Directory.current.path}\\print-server.exe', [], runInShell: true);
-  //     _isRunning = true;
-  //     _clientsConnected = 1;
-  //     final serverUrl = "http://$_localIp:${AppConfig.serverPort}/";
-  //     notifyListeners();
-  //     await Future.delayed(const Duration(seconds: 1));
-  //     await fetchServerDetails();
-  //     _addLog('System started...'.toUpperCase());
-  //     _addLog('Server is running on: ${serverUrl}');
-  //     _addLog('pqms control panel server active on port ${AppConfig.serverPort}.'.toUpperCase());
-
-  //     UrlLauncherServices.urlLauncher(serverUrl);
-
-  //     _process?.stdout.transform(utf8.decoder).listen((data) {
-  //       final lines = data.trim().split('\n');
-  //       for (var line in lines) {
-  //         if (line.isNotEmpty) _addLog(line);
-  //       }
-  //     });
-
-  //     _process?.stderr.transform(utf8.decoder).listen((data) {
-  //       final lines = data.trim().split('\n');
-  //       for (var line in lines) {
-  //         if (line.isNotEmpty) _addLog('ERROR: $line'.toUpperCase());
-  //       }
-  //     });
-  //   } catch (e) {
-  //     _addLog('Failed to start server process: $e'.toUpperCase());
-  //     _isRunning = false;
-  //     notifyListeners();
-  //   }
-  // }
 
   Future<void> stopServer() async {
     if (!_isRunning) return;
