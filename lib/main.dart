@@ -15,7 +15,7 @@ void main() async {
   // Replace with your GitHub repository details
   // Using GitHub Pages URL: https://<username>.github.io/<repo-name>/appcast.xml
   // Or raw GitHub file URL: https://raw.githubusercontent.com/<username>/<repo>/main/appcast.xml
-  String feedURL = 'https://raw.githubusercontent.com/joshieponix/pqms_control_panel/refs/heads/dev/appcast.xml?token=GHSAT0AAAAAAD73HB3Y3NGD2Y6U7OIYYH3U2V4ZDBQ';
+  String feedURL = 'https://raw.githubusercontent.com/joshieponix/pqms_control_panel/refs/heads/dev/appcast.xml?token=GHSAT0AAAAAAD73HB3YBWPHGWZ7OT3JI5762V44EWQ';
 
   await autoUpdater.setFeedURL(feedURL);
   await autoUpdater.checkForUpdates(inBackground: true);
