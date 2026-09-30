@@ -8,14 +8,14 @@
         <item>
             <title>Version 1.0.1</title>
             <sparkle:releaseNotesLink>
-                https://github.com/joshieponix/pqms_control_panel/releases/tag/v1.0.1
+               https://github.com/joshieponix/pqms_control_panel/releases/tag/v1.0.1
             </sparkle:releaseNotesLink>
             <pubDate>Wed, 30 Sep 2026 12:00:00 +0000</pubDate>
             <enclosure 
                 url="https://github.com/joshieponix/pqms_control_panel/releases/download/v1.0.1/pqms-setup-v1.0.1.exe"
                 sparkle:version="1.0.1"
                 sparkle:os="windows"
-                sparkle:dsaSignature="MDwCHEpSyAnVVDVPa5KZgSiKkUYCEX3SdlcPyvPslMoCHCmRw3rSkBrTu5+MRKoSdeYpjvEYmjgyML9RbHs="
+                sparkle:dsaSignature="MD0CHQC41sgxEywISPj0Yw9qRZdjV9VFbhiLlU5IEQUQAhxHvNIbbk+xIr/URz3CaUyojPA9fffCi6UCVX5w"
                 length="13127245"
                 type="application/octet-stream" />
         </item>
