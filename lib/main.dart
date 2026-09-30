@@ -15,10 +15,10 @@ void main() async {
   // Replace with your GitHub repository details
   // Using GitHub Pages URL: https://<username>.github.io/<repo-name>/appcast.xml
   // Or raw GitHub file URL: https://raw.githubusercontent.com/<username>/<repo>/main/appcast.xml
-  String feedURL = 'https://raw.githubusercontent.com/joshieponix/pqms_control_panel/refs/heads/dev/appcast.xml';
+ String feedURL = 'https://raw.githubusercontent.com/YOUR_GITHUB_USER/YOUR_REPO/dev/appcast.xml';
 
   await autoUpdater.setFeedURL(feedURL);
-  await autoUpdater.checkForUpdates(inBackground: false);
+  await autoUpdater.checkForUpdates(inBackground: true);
   await autoUpdater.setScheduledCheckInterval(3600); // Check every 1 hour
   runApp(
     ChangeNotifierProvider(
