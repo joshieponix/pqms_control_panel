@@ -18,7 +18,7 @@ void main() async {
   String feedURL = 'https://raw.githubusercontent.com/joshieponix/pqms_control_panel/refs/heads/dev/appcast.xml?token=GHSAT0AAAAAAD73HB3Y3NGD2Y6U7OIYYH3U2V4ZDBQ';
 
   await autoUpdater.setFeedURL(feedURL);
-  await autoUpdater.checkForUpdates(inBackground: false);
+  await autoUpdater.checkForUpdates(inBackground: true);
   await autoUpdater.setScheduledCheckInterval(3600); // Check every 1 hour
   runApp(
     ChangeNotifierProvider(
