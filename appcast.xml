@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle">
     <channel>
         <title>PQMS Control Panel Updates</title>
-        <link>https://github.com/YOUR_GITHUB_USER/YOUR_REPO</link>
+        <link>https://github.com/joshieponix/pqms_control_panel</link>
         <description>Updates for PQMS Control Panel</description>
         <language>en</language>
         <item>
-            <title>Version 1.0.0</title>
+            <title>Version 1.0.1</title>
             <sparkle:releaseNotesLink>
-                https://github.com/YOUR_GITHUB_USER/YOUR_REPO/releases/tag/v1.0.0
+                https://github.com/joshieponix/pqms_control_panel/releases/tag/v1.0.1
             </sparkle:releaseNotesLink>
-            <pubDate>Wed, 30 Sep 2026 12:00:00 +0000</pubDate>
-            <enclosure 
-                url="https://github.com/YOUR_GITHUB_USER/YOUR_REPO/releases/download/v1.0.0/PQMS-Setup-1.0.0.exe"
-                sparkle:version="1.0.0"
+            <pubDate>Wed, 30 Sep 2026 9:00:20 +0000</pubDate>
+            <enclosure
+                url="https://github.com/joshieponix/pqms_control_panel/releases/download/v1.0.1/pqms-setup-v1.0.1.exe"
+                sparkle:version="1.0.1"
                 sparkle:os="windows"
-                sparkle:dsaSignature="INITIAL_SETUP"
-                length="1000000"
+                sparkle:dsaSignature="MD0CHQCwoJERrmxjEL6tBAXlV10vYp0AZLzwvORpnUNkAhwjX/5P3YI7BuMli/zNvdM4noO+BUaHXqy3EDjk"
+                length="13128816"
                 type="application/octet-stream" />
         </item>
     </channel>
