@@ -27,7 +27,7 @@ class ServerControlButton extends StatelessWidget {
                         backgroundColor: isStart
                             ? (isRunning
                                 ? const Color(0xFF33363F)
-                                    : const Color(0xFF39E55A))
+                                    : const Color.fromARGB(255, 72, 0, 255))//const Color(0xFF39E55A))
                                       : (isRunning
                                             ?  const Color.fromARGB(255, 182, 1, 1) 
                                           : const Color(0xFF1E2025)),
