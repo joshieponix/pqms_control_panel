@@ -55,7 +55,6 @@ class ServerControlProvider extends ChangeNotifier {
         notifyListeners();
       } else {
         _isRunning = false;
-        String a = "Asdf";
       }
     } catch (e) {
       _isRunning = false;
