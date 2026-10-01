@@ -4,7 +4,6 @@ import 'package:print_queue_control/core/services/window_service.dart';
 import 'package:provider/provider.dart';
 import 'home/ServerControlDashboard.dart';
 import 'provider/ServerControlProvider.dart';
-// import 'package:auto_updater/auto_updater.dart';
 
 void main() async {
   
@@ -15,11 +14,6 @@ void main() async {
   );
 
  await UpdaterService.instanceInternalPoint.initialize();
-//  String feedURL = 'https://raw.githubusercontent.com/joshieponix/pqms_control_panel/refs/heads/dev/appcast.xml';
-
-//   await autoUpdater.setFeedURL(feedURL);
-//   await autoUpdater.checkForUpdates(inBackground: true);
-//   await autoUpdater.setScheduledCheckInterval(3600); // Check every 1 hour
 
   runApp(
     ChangeNotifierProvider(
