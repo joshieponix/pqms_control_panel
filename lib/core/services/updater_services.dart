@@ -15,7 +15,7 @@ class UpdaterService{
         try {
           // Set feed url
           await autoUpdater.setFeedURL(_feedURL);
-
+          
           // Set background schedule
           await autoUpdater.setScheduledCheckInterval(_intervalTime);
 
