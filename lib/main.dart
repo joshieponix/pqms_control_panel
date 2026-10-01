@@ -1,23 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:print_queue_control/core/services/updater_services.dart';
 import 'package:print_queue_control/core/services/window_service.dart';
 import 'package:provider/provider.dart';
 import 'home/ServerControlDashboard.dart';
 import 'provider/ServerControlProvider.dart';
-import 'package:auto_updater/auto_updater.dart';
+// import 'package:auto_updater/auto_updater.dart';
 
 void main() async {
   
   WindowService.windowsOption(
     size: const Size(1280, 720),
     title: 'PQMS CONTROL PANEL',
-    resizable: false, // Dili ma-resize
+    resizable: false,
   );
 
- String feedURL = 'https://raw.githubusercontent.com/joshieponix/pqms_control_panel/refs/heads/dev/appcast.xml';
+ await UpdaterService.instanceInternalPoint.initialize();
+//  String feedURL = 'https://raw.githubusercontent.com/joshieponix/pqms_control_panel/refs/heads/dev/appcast.xml';
 
-  await autoUpdater.setFeedURL(feedURL);
-  await autoUpdater.checkForUpdates(inBackground: true);
-  await autoUpdater.setScheduledCheckInterval(3600); // Check every 1 hour
+//   await autoUpdater.setFeedURL(feedURL);
+//   await autoUpdater.checkForUpdates(inBackground: true);
+//   await autoUpdater.setScheduledCheckInterval(3600); // Check every 1 hour
 
   runApp(
     ChangeNotifierProvider(
