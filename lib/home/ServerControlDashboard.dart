@@ -7,6 +7,7 @@ import 'package:print_queue_control/shared/widget/ServerDetailItem.dart';
 import 'package:provider/provider.dart';
 import '../provider/ServerControlProvider.dart';
 import '../shared/widget/ServerControlButton .dart';
+import 'package:auto_updater/auto_updater.dart';
 
 class ServerControlDashboard extends StatefulWidget {
   const ServerControlDashboard({super.key});
@@ -15,7 +16,7 @@ class ServerControlDashboard extends StatefulWidget {
   State<ServerControlDashboard> createState() => _ServerControlDashboardState();
 }
 
-class _ServerControlDashboardState extends State<ServerControlDashboard> {
+class _ServerControlDashboardState extends State<ServerControlDashboard>{
   final ScrollController _scrollController = ScrollController();
 
   void _scrollToBottom() {
@@ -30,11 +31,15 @@ class _ServerControlDashboardState extends State<ServerControlDashboard> {
     });
   }
 
+
   @override
   void dispose() {
     _scrollController.dispose();
     super.dispose();
   }
+
+
+
 
   @override
   Widget build(BuildContext context) {

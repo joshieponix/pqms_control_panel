@@ -3,7 +3,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:auto_updater/auto_updater.dart';
 
-class UpdaterService{
+class UpdaterService {
 
     UpdaterService.InternalPoint();
     static final UpdaterService instanceInternalPoint = UpdaterService.InternalPoint();
@@ -35,5 +35,7 @@ class UpdaterService{
             debugPrint(e.toString());
         }
      }
+
+    
 
 }
