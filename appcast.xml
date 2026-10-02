@@ -22,7 +22,7 @@
                                     Release Notes
                                 </span>
                                 <h3 style="margin: 0; font-size: 18px; font-weight: 700; color: #f8fafc; letter-spacing: -0.2px;">
-                                    Version 1.0.2
+                                    Version 1.0.0
                                 </h3>
                             </div>
                             <span style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 20px;">
@@ -34,9 +34,9 @@
                     <!-- Body Section -->
                     <div style="padding: 20px;">
                         
-                        <div style="margin-bottom: 18px;">
+                       <div style="margin-bottom: 18px;">
                             <p style="margin: 0 0 14px 0; font-size: 13px; font-weight: 600; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px;">
-                                Key Improvements & Fixes
+                                Core Features & Capabilities
                             </p>
 
                             <div style="display: flex; flex-direction: column; gap: 12px;">
@@ -47,7 +47,27 @@
                                         ✓
                                     </div>
                                     <div style="font-size: 13px; line-height: 1.5; color: #334155;">
-                                        <strong style="color: #0f172a;">Update:</strong> Change new color of start button.
+                                        <strong style="color: #0f172a;">Initial Release:</strong> First official launch of the Print Queue Management System (PQMS) Control Panel.
+                                    </div>
+                                </div>
+
+                                <!-- Item 2 -->
+                                <div style="display: flex; align-items: flex-start; gap: 10px;">
+                                    <div style="background-color: #dcfce7; color: #15803d; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: bold; flex-shrink: 0; margin-top: 1px;">
+                                        ✓
+                                    </div>
+                                    <div style="font-size: 13px; line-height: 1.5; color: #334155;">
+                                        <strong style="color: #0f172a;">Core Engine:</strong> Enabled local server hosting, auto-web app detection, and real-time print log monitoring.
+                                    </div>
+                                </div>
+
+                                <!-- Item 3 -->
+                                <div style="display: flex; align-items: flex-start; gap: 10px;">
+                                    <div style="background-color: #dcfce7; color: #15803d; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: bold; flex-shrink: 0; margin-top: 1px;">
+                                        ✓
+                                    </div>
+                                    <div style="font-size: 13px; line-height: 1.5; color: #334155;">
+                                        <strong style="color: #0f172a;">Auto-Update System:</strong> Integrated WinSparkle update framework for seamless background updates.
                                     </div>
                                 </div>
 

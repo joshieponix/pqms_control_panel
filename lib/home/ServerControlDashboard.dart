@@ -7,7 +7,6 @@ import 'package:print_queue_control/shared/widget/ServerDetailItem.dart';
 import 'package:provider/provider.dart';
 import '../provider/ServerControlProvider.dart';
 import '../shared/widget/ServerControlButton .dart';
-import 'package:auto_updater/auto_updater.dart';
 
 class ServerControlDashboard extends StatefulWidget {
   const ServerControlDashboard({super.key});
@@ -284,7 +283,7 @@ class _ServerControlDashboardState extends State<ServerControlDashboard>{
                   // FOOTER
                   Center(
                     child: Text(
-                      'PQMS CONTROL PANEL Version: v1.0.2 | © 2026 PRINT QUEUE MANAGMENT SYSTEM',
+                      'PQMS CONTROL PANEL Version: v1.0.0 | © 2026 PRINT QUEUE MANAGMENT SYSTEM',
                       style: GoogleFontServices.Poppins(
                         PoppinsColor: Colors.white38,
                         Poppinsfontsize: 14,
