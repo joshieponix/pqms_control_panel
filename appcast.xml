@@ -47,27 +47,7 @@
                                         ✓
                                     </div>
                                     <div style="font-size: 13px; line-height: 1.5; color: #334155;">
-                                        <strong style="color: #0f172a;">Bug Fixes:</strong> Resolved the auto-update detection issue.
-                                    </div>
-                                </div>
-
-                                <!-- Item 2 -->
-                                <div style="display: flex; align-items: flex-start; gap: 10px;">
-                                    <div style="background-color: #dcfce7; color: #15803d; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: bold; flex-shrink: 0; margin-top: 1px;">
-                                        ✓
-                                    </div>
-                                    <div style="font-size: 13px; line-height: 1.5; color: #334155;">
-                                        <strong style="color: #0f172a;">Performance:</strong> Improved local print queue synchronization speed.
-                                    </div>
-                                </div>
-
-                                <!-- Item 3 -->
-                                <div style="display: flex; align-items: flex-start; gap: 10px;">
-                                    <div style="background-color: #dcfce7; color: #15803d; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: bold; flex-shrink: 0; margin-top: 1px;">
-                                        ✓
-                                    </div>
-                                    <div style="font-size: 13px; line-height: 1.5; color: #334155;">
-                                        <strong style="color: #0f172a;">UI Enhancements:</strong> Refined status indicators on the dashboard.
+                                        <strong style="color: #0f172a;">Bug Fixes:</strong> Change new color of start button.
                                     </div>
                                 </div>
 
