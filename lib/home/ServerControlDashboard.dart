@@ -15,7 +15,7 @@ class ServerControlDashboard extends StatefulWidget {
   State<ServerControlDashboard> createState() => _ServerControlDashboardState();
 }
 
-class _ServerControlDashboardState extends State<ServerControlDashboard> {
+class _ServerControlDashboardState extends State<ServerControlDashboard>{
   final ScrollController _scrollController = ScrollController();
 
   void _scrollToBottom() {
@@ -30,11 +30,15 @@ class _ServerControlDashboardState extends State<ServerControlDashboard> {
     });
   }
 
+
   @override
   void dispose() {
     _scrollController.dispose();
     super.dispose();
   }
+
+
+
 
   @override
   Widget build(BuildContext context) {

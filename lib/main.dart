@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:print_queue_control/core/services/updater_services.dart';
 import 'package:print_queue_control/core/services/window_service.dart';
 import 'package:provider/provider.dart';
 import 'home/ServerControlDashboard.dart';
 import 'provider/ServerControlProvider.dart';
 
-void main() {
+void main() async {
+  
   WindowService.windowsOption(
     size: const Size(1280, 720),
     title: 'PQMS CONTROL PANEL',
-    resizable: false, // Dili ma-resize
+    resizable: false,
   );
+
+ await UpdaterService.instanceInternalPoint.initialize();
+
   runApp(
     ChangeNotifierProvider(
       create: (_) => ServerControlProvider(),
