@@ -283,7 +283,7 @@ class _ServerControlDashboardState extends State<ServerControlDashboard>{
                   // FOOTER
                   Center(
                     child: Text(
-                      'PQMS CONTROL PANEL Version: v1.0.2 | © 2026 PRINT QUEUE MANAGMENT SYSTEM',
+                      'PQMS CONTROL PANEL Version: v1.0.0 | © 2026 PRINT QUEUE MANAGMENT SYSTEM',
                       style: GoogleFontServices.Poppins(
                         PoppinsColor: Colors.white38,
                         Poppinsfontsize: 14,

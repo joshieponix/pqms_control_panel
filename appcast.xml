@@ -6,7 +6,7 @@
         <description>Updates for PQMS Control Panel</description>
         <language>en</language>
         <item>
-            <title>Version 1.0.2</title>
+            <title>Version 1.0.0</title>
             <!-- <sparkle:releaseNotesLink>
               https://github.com/joshieponix/pqms_control_panel/releases/tag/v1.0.2
             </sparkle:releaseNotesLink> -->
@@ -22,7 +22,7 @@
                                     Release Notes
                                 </span>
                                 <h3 style="margin: 0; font-size: 18px; font-weight: 700; color: #f8fafc; letter-spacing: -0.2px;">
-                                    Version 1.0.2
+                                    Version 1.0.0
                                 </h3>
                             </div>
                             <span style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 20px;">
@@ -47,30 +47,29 @@
                                         ✓
                                     </div>
                                     <div style="font-size: 13px; line-height: 1.5; color: #334155;">
-                                        <strong style="color: #0f172a;">New Release Update:</strong> Update start button color
-                                        <!-- First official launch of the Print Queue Management System (PQMS) Control Panel. -->
+                                        <strong style="color: #0f172a;">New Release Update:</strong> First official launch of the Print Queue Management System (PQMS) Control Panel.
                                     </div>
                                 </div>
 
                                 <!-- Item 2 -->
-                                <!-- <div style="display: flex; align-items: flex-start; gap: 10px;">
+                                <div style="display: flex; align-items: flex-start; gap: 10px;">
                                     <div style="background-color: #dcfce7; color: #15803d; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: bold; flex-shrink: 0; margin-top: 1px;">
                                         ✓
                                     </div>
                                     <div style="font-size: 13px; line-height: 1.5; color: #334155;">
                                         <strong style="color: #0f172a;">Core Engine:</strong> Enabled local server hosting for Operator Web Interface, and real-time print log monitoring.
                                     </div>
-                                </div> -->
+                                </div>
 
                                 <!-- Item 3 -->
-                                <!-- <div style="display: flex; align-items: flex-start; gap: 10px;">
+                                <div style="display: flex; align-items: flex-start; gap: 10px;">
                                     <div style="background-color: #dcfce7; color: #15803d; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: bold; flex-shrink: 0; margin-top: 1px;">
                                         ✓
                                     </div>
                                     <div style="font-size: 13px; line-height: 1.5; color: #334155;">
                                         <strong style="color: #0f172a;">Auto-Update System:</strong> Integrated WinSparkle update framework for seamless background updates.
                                     </div>
-                                </div> -->
+                                </div>
 
                             </div>
                         </div>
@@ -85,13 +84,13 @@
                 </div>
                 ]]>
             </description>
-            <pubDate>Thu, 02 Oct 2026 00:00:00 +0000</pubDate>
+            <pubDate>Thu, 03 Oct 2026 00:00:00 +0000</pubDate>
             <enclosure
-                url="https://github.com/joshieponix/pqms_control_panel/releases/download/v1.0.2/pqms-setup-v1.0.2.exe"
-                sparkle:version="1.0.2"
+                url="https://github.com/joshieponix/pqms_control_panel/releases/download/v1.0.0/pqms-setup-v1.0.0.exe"
+                sparkle:version="1.0.0"
                 sparkle:os="windows"
-                sparkle:dsaSignature="MD4CHQCLDSJIudLQDO9nfZ4v7Yj2luKQSS6dj6TMgU7UAh0AqLgRgBl6sNIIEVtrzjaj68e0+w7wEQ4/Z6t9ig=="
-                length="26293393"
+                sparkle:dsaSignature="MD0CHB8uNPeHBagbQHKNAhsCBA7jI6GjP2kQuUqi4tQCHQCQqh5EDx2Scvyti7NC71u8ZONqulPbod5jWJPK"
+                length="26293424"
                 type="application/octet-stream" />
         </item>
     </channel>
