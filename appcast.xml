@@ -87,7 +87,7 @@
             </description>
             <pubDate>Thu, 02 Oct 2026 00:00:00 +0000</pubDate>
             <enclosure
-                url="https://github.com/joshieponix/pqms_control_panel/releases/download/v1.0.1/pqms-setup-v1.0.1.exe"
+                url="https://github.com/joshieponix/pqms_control_panel/releases/download/v1.0.1/pqms-setup-v1.0.1.exes"
                 sparkle:version="1.0.1"
                 sparkle:os="windows"
                 sparkle:dsaSignature="MD0CHQCTN8+8TWzMgIb13RRuJ44ljXBTcPZhzB47F3JRAhxhZn7nZBf6qIxmpOwRdw7DDMwELhMzYfLM8Pt3"
